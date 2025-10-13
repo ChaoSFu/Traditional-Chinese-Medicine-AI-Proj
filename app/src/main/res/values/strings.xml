@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">中医手部穴位定位</string>
+
+    <!-- 状态文本 -->
+    <string name="status_initializing">正在初始化…</string>
+    <string name="status_ready">就绪</string>
+    <string name="status_detecting">检测中</string>
+    <string name="status_no_hand_detected">未检测到手部</string>
+    <string name="status_error">初始化失败</string>
+
+    <!-- 按钮文本 -->
+    <string name="btn_show_landmarks">显示关键点</string>
+    <string name="btn_hide_landmarks">隐藏关键点</string>
+    <string name="btn_show_connections">显示骨架</string>
+    <string name="btn_hide_connections">隐藏骨架</string>
+
+    <!-- 穴位名称 -->
+    <string name="acupoint_li4_name">合谷</string>
+    <string name="acupoint_li4_code">LI4</string>
+    <string name="acupoint_pc8_name">劳宫</string>
+    <string name="acupoint_pc8_code">PC8</string>
+
+    <!-- 错误消息 -->
+    <string name="error_camera_permission">需要相机权限才能使用此应用</string>
+    <string name="error_camera_init">相机初始化失败</string>
+    <string name="error_model_init">模型初始化失败</string>
+</resources>
