@@ -13,15 +13,33 @@
     <string name="btn_hide_landmarks">隐藏关键点</string>
     <string name="btn_show_connections">显示骨架</string>
     <string name="btn_hide_connections">隐藏骨架</string>
+    <string name="btn_switch_camera">切换摄像头</string>
+    <string name="btn_take_photo">拍照</string>
 
     <!-- 穴位名称 -->
+    <!-- 手背穴位 -->
     <string name="acupoint_li4_name">合谷</string>
     <string name="acupoint_li4_code">LI4</string>
+    <string name="acupoint_li4_location">手背，第1、2掌骨之间</string>
+    <string name="acupoint_li5_name">阳溪</string>
+    <string name="acupoint_li5_code">LI5</string>
+    <string name="acupoint_li5_location">手背，腕背横纹桡侧凹陷处</string>
+
+    <!-- 手心穴位 -->
     <string name="acupoint_pc8_name">劳宫</string>
     <string name="acupoint_pc8_code">PC8</string>
+    <string name="acupoint_pc8_location">手心，第2、3掌骨之间</string>
+    <string name="acupoint_ht8_name">少府</string>
+    <string name="acupoint_ht8_code">HT8</string>
+    <string name="acupoint_ht8_location">手心，第4、5掌骨之间</string>
 
     <!-- 错误消息 -->
     <string name="error_camera_permission">需要相机权限才能使用此应用</string>
     <string name="error_camera_init">相机初始化失败</string>
     <string name="error_model_init">模型初始化失败</string>
+    <string name="error_camera_not_ready">相机尚未准备好</string>
+    <string name="error_photo_capture">拍照失败</string>
+
+    <!-- 成功消息 -->
+    <string name="photo_saved_success">照片已保存到相册</string>
 </resources>

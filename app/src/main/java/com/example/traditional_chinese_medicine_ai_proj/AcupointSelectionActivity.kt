@@ -52,8 +52,8 @@ class AcupointSelectionActivity : AppCompatActivity() {
             startDetection()
         }
 
-        // 默认选中所有穴位
-        selectedAcupoints.addAll(listOf("LI4", "PC8"))
+        // 默认选中所有穴位（手背2个，手心2个）
+        selectedAcupoints.addAll(listOf("LI4", "LI5", "PC8", "HT8"))
         updateButtonState()
     }
 

@@ -26,14 +26,28 @@ class OverlayView @JvmOverloads constructor(
         isAntiAlias = true
     }
 
+    // 手背穴位
     private val li4Paint = Paint().apply {
-        color = Color.parseColor("#F44336")  // 红色（合谷）
+        color = Color.parseColor("#F44336")  // 红色（合谷 - 手背）
         style = Paint.Style.FILL
         isAntiAlias = true
     }
 
+    private val li5Paint = Paint().apply {
+        color = Color.parseColor("#E91E63")  // 粉红色（阳溪 - 手背）
+        style = Paint.Style.FILL
+        isAntiAlias = true
+    }
+
+    // 手心穴位
     private val pc8Paint = Paint().apply {
-        color = Color.parseColor("#FF9800")  // 橙色（劳宫）
+        color = Color.parseColor("#FF9800")  // 橙色（劳宫 - 手心）
+        style = Paint.Style.FILL
+        isAntiAlias = true
+    }
+
+    private val ht8Paint = Paint().apply {
+        color = Color.parseColor("#FFC107")  // 琥珀色（少府 - 手心）
         style = Paint.Style.FILL
         isAntiAlias = true
     }
@@ -55,10 +69,17 @@ class OverlayView @JvmOverloads constructor(
 
     // 数据
     private var handLandmarks: HandLandmarks? = null
-    private var li4Position: PointF? = null  // 合谷穴位置
-    private var pc8Position: PointF? = null  // 劳宫穴位置
+
+    // 手背穴位
+    private var li4Position: PointF? = null  // 合谷穴位置（手背）
+    private var li5Position: PointF? = null  // 阳溪穴位置（手背）
+
+    // 手心穴位
+    private var pc8Position: PointF? = null  // 劳宫穴位置（手心）
+    private var ht8Position: PointF? = null  // 少府穴位置（手心）
+
     private var showLandmarks = true         // 是否显示所有关键点
-    private var showConnections = false       // 是否显示骨架连接线
+    private var showConnections = true       // 是否显示骨架连接线
 
     companion object {
         private const val LANDMARK_RADIUS = 8f
@@ -92,7 +113,7 @@ class OverlayView @JvmOverloads constructor(
     }
 
     /**
-     * 更新合谷穴位置
+     * 更新合谷穴位置（手背）
      */
     fun updateLi4Position(position: PointF?) {
         this.li4Position = position
@@ -100,10 +121,26 @@ class OverlayView @JvmOverloads constructor(
     }
 
     /**
-     * 更新劳宫穴位置
+     * 更新阳溪穴位置（手背）
+     */
+    fun updateLi5Position(position: PointF?) {
+        this.li5Position = position
+        invalidate()
+    }
+
+    /**
+     * 更新劳宫穴位置（手心）
      */
     fun updatePc8Position(position: PointF?) {
         this.pc8Position = position
+        invalidate()
+    }
+
+    /**
+     * 更新少府穴位置（手心）
+     */
+    fun updateHt8Position(position: PointF?) {
+        this.ht8Position = position
         invalidate()
     }
 
@@ -129,7 +166,9 @@ class OverlayView @JvmOverloads constructor(
     fun clear() {
         handLandmarks = null
         li4Position = null
+        li5Position = null
         pc8Position = null
+        ht8Position = null
         invalidate()
     }
 
@@ -150,13 +189,12 @@ class OverlayView @JvmOverloads constructor(
             drawLandmarks(canvas, landmarks, w, h)
         }
 
-        // 3. 绘制合谷穴（LI4）
+        // 3. 绘制手背穴位
+        // 3.1 合谷穴（LI4）
         li4Position?.let { pos ->
             val screenX = pos.x * w
             val screenY = pos.y * h
             canvas.drawCircle(screenX, screenY, ACUPOINT_RADIUS, li4Paint)
-
-            // 绘制标签
             canvas.drawText(
                 "合谷 (LI4)",
                 screenX + TEXT_OFFSET_X,
@@ -165,15 +203,40 @@ class OverlayView @JvmOverloads constructor(
             )
         }
 
-        // 4. 绘制劳宫穴（PC8）
+        // 3.2 阳溪穴（LI5）
+        li5Position?.let { pos ->
+            val screenX = pos.x * w
+            val screenY = pos.y * h
+            canvas.drawCircle(screenX, screenY, ACUPOINT_RADIUS, li5Paint)
+            canvas.drawText(
+                "阳溪 (LI5)",
+                screenX + TEXT_OFFSET_X,
+                screenY + TEXT_OFFSET_Y,
+                textPaint
+            )
+        }
+
+        // 4. 绘制手心穴位
+        // 4.1 劳宫穴（PC8）
         pc8Position?.let { pos ->
             val screenX = pos.x * w
             val screenY = pos.y * h
             canvas.drawCircle(screenX, screenY, ACUPOINT_RADIUS, pc8Paint)
-
-            // 绘制标签
             canvas.drawText(
                 "劳宫 (PC8)",
+                screenX + TEXT_OFFSET_X,
+                screenY + TEXT_OFFSET_Y,
+                textPaint
+            )
+        }
+
+        // 4.2 少府穴（HT8）
+        ht8Position?.let { pos ->
+            val screenX = pos.x * w
+            val screenY = pos.y * h
+            canvas.drawCircle(screenX, screenY, ACUPOINT_RADIUS, ht8Paint)
+            canvas.drawText(
+                "少府 (HT8)",
                 screenX + TEXT_OFFSET_X,
                 screenY + TEXT_OFFSET_Y,
                 textPaint

@@ -18,7 +18,10 @@ import com.google.mediapipe.tasks.vision.handlandmarker.HandLandmarkerResult
  */
 class HandLandmarkerHelper(
     private val context: Context,
-    private val listener: HandLandmarkerListener? = null
+    private val listener: HandLandmarkerListener? = null,
+    private val minDetectionConfidence: Float = 0.6f,  // 平衡检测置信度，提高响应速度
+    private val minTrackingConfidence: Float = 0.6f,   // 平衡跟踪置信度，提高响应速度
+    private val minPresenceConfidence: Float = 0.6f    // 平衡存在置信度，提高响应速度
 ) {
     private var handLandmarker: HandLandmarker? = null
     private var isInitialized = false
@@ -28,9 +31,6 @@ class HandLandmarkerHelper(
         // MediaPipe 要求路径必须包含斜杠，使用相对于 assets 的路径
         private const val MODEL_ASSET_PATH = "hand_landmarker.task"
         private const val MAX_NUM_HANDS = 1
-        private const val MIN_HAND_DETECTION_CONFIDENCE = 0.5f
-        private const val MIN_HAND_TRACKING_CONFIDENCE = 0.5f
-        private const val MIN_HAND_PRESENCE_CONFIDENCE = 0.5f
     }
 
     /**
@@ -71,9 +71,9 @@ class HandLandmarkerHelper(
                     .setBaseOptions(baseOptions)
                     .setRunningMode(RunningMode.IMAGE)  // 图像模式（实时视频流使用IMAGE模式处理每一帧）
                     .setNumHands(MAX_NUM_HANDS)
-                    .setMinHandDetectionConfidence(MIN_HAND_DETECTION_CONFIDENCE)
-                    .setMinTrackingConfidence(MIN_HAND_TRACKING_CONFIDENCE)
-                    .setMinHandPresenceConfidence(MIN_HAND_PRESENCE_CONFIDENCE)
+                    .setMinHandDetectionConfidence(minDetectionConfidence)
+                    .setMinTrackingConfidence(minTrackingConfidence)
+                    .setMinHandPresenceConfidence(minPresenceConfidence)
                     .build()
 
                 handLandmarker = HandLandmarker.createFromOptions(context, options)

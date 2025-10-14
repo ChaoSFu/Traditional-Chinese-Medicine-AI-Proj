@@ -62,21 +62,44 @@
         android:layout_gravity="bottom"
         android:background="#80000000"
         android:gravity="center"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:padding="16dp">
 
-        <Button
-            android:id="@+id/btnToggleLandmarks"
+        <!-- 第一行按钮 -->
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:text="@string/btn_show_landmarks" />
+            android:gravity="center"
+            android:orientation="horizontal">
 
+            <Button
+                android:id="@+id/btnToggleLandmarks"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:text="@string/btn_show_landmarks" />
+
+            <Button
+                android:id="@+id/btnToggleConnections"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:text="@string/btn_show_connections" />
+
+            <Button
+                android:id="@+id/btnSwitchCamera"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/btn_switch_camera" />
+        </LinearLayout>
+
+        <!-- 第二行：拍照按钮 -->
         <Button
-            android:id="@+id/btnToggleConnections"
+            android:id="@+id/btnTakePhoto"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/btn_show_connections" />
+            android:layout_marginTop="8dp"
+            android:text="@string/btn_take_photo" />
     </LinearLayout>
 
 </FrameLayout>
