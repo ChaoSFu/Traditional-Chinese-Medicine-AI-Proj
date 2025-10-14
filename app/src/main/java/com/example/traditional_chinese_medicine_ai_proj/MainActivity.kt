@@ -7,6 +7,7 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Canvas
 import android.graphics.Matrix
+import android.view.Surface
 import android.os.Build
 import android.os.Bundle
 import android.os.Environment
@@ -227,8 +228,9 @@ class MainActivity : AppCompatActivity() {
 
     private fun switchCamera() {
         isFrontCamera = !isFrontCamera
-        // 切换摄像头时重置平滑器
+        // 切换摄像头时重置平滑器和手势判断缓存
         landmarkSmoother.reset()
+        CoordinateUtils.resetPalmFacingCache()
         cameraProvider?.let { provider ->
             bindCamera(provider)
         }
@@ -266,6 +268,7 @@ class MainActivity : AppCompatActivity() {
         // 图像捕获配置
         imageCapture = ImageCapture.Builder()
             .setCaptureMode(ImageCapture.CAPTURE_MODE_MINIMIZE_LATENCY)
+            .setTargetRotation(Surface.ROTATION_0)  // 固定旋转角度为0，避免自动旋转
             .build()
 
         // 选择摄像头
@@ -339,18 +342,32 @@ class MainActivity : AppCompatActivity() {
                     rotatedBitmap
                 }
 
-                // 第三步：图像增强（可选）
+                // 第三步：缩放到 512x512 提高检测精度
+                val targetSize = 512
+                val scaledBitmap = Bitmap.createScaledBitmap(
+                    mirroredBitmap,
+                    targetSize,
+                    targetSize,
+                    true  // 使用双线性插值获得更好的质量
+                )
+                if (scaledBitmap != mirroredBitmap) {
+                    mirroredBitmap.recycle()
+                }
+
+                // 第四步：图像增强（可选）
                 val processedBitmap = if (enableImageEnhancement) {
                     // 使用专门优化手部检测的增强方法
-                    val enhanced = ImagePreprocessor.enhanceForHandDetection(mirroredBitmap)
-                    mirroredBitmap.recycle()
+                    val enhanced = ImagePreprocessor.enhanceForHandDetection(scaledBitmap)
+                    scaledBitmap.recycle()
                     enhanced
                 } else {
-                    mirroredBitmap
+                    scaledBitmap
                 }
 
                 // 执行检测（processedBitmap 将在 detectAsync 内部被回收）
-                handLandmarkerHelper.detectAsync(processedBitmap)
+                // VIDEO 模式需要传入帧时间戳
+                val frameTimestampMs = System.currentTimeMillis()
+                handLandmarkerHelper.detectAsync(processedBitmap, frameTimestampMs)
 
                 // 计算FPS
                 calculateFps()
@@ -387,13 +404,22 @@ class MainActivity : AppCompatActivity() {
 
         // 更新状态
         statusText.text = getString(R.string.status_detecting)
-        handednessText.text = "检测到: ${
+        // 前置摄像头需要反转左右手判断（因为镜像）
+        val displayHandedness = if (isFrontCamera) {
+            when (handLandmarks.handedness) {
+                "Left" -> "右手"   // 前置摄像头镜像后反转
+                "Right" -> "左手"  // 前置摄像头镜像后反转
+                else -> "未知"
+            }
+        } else {
             when (handLandmarks.handedness) {
                 "Left" -> "左手"
                 "Right" -> "右手"
                 else -> "未知"
             }
-        } - $handPose"
+        }
+
+        handednessText.text = "检测到: $displayHandedness - $handPose"
 
         // 更新关键点
         overlayView.updateHandLandmarks(handLandmarks)
@@ -524,8 +550,39 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun createAnnotatedBitmap(originalBitmap: Bitmap): Bitmap {
+        val processedBitmap = if (isFrontCamera) {
+            // 前置摄像头：先水平翻转，再旋转 90 度
+            val matrix1 = Matrix().apply {
+                postScale(-1f, 1f, originalBitmap.width / 2f, originalBitmap.height / 2f)
+            }
+            val flipped = Bitmap.createBitmap(
+                originalBitmap, 0, 0, originalBitmap.width, originalBitmap.height, matrix1, true
+            )
+
+            val matrix2 = Matrix().apply {
+                postRotate(90f)
+            }
+            val rotated = Bitmap.createBitmap(
+                flipped, 0, 0, flipped.width, flipped.height, matrix2, true
+            )
+
+            if (flipped != rotated) flipped.recycle()
+            if (originalBitmap != flipped) originalBitmap.recycle()
+            rotated
+        } else {
+            // 后置摄像头：只旋转 90 度
+            val matrix = Matrix().apply {
+                postRotate(90f)
+            }
+            val rotated = Bitmap.createBitmap(
+                originalBitmap, 0, 0, originalBitmap.width, originalBitmap.height, matrix, true
+            )
+            if (rotated != originalBitmap) originalBitmap.recycle()
+            rotated
+        }
+
         // 创建可变的 Bitmap 副本
-        val annotatedBitmap = originalBitmap.copy(Bitmap.Config.ARGB_8888, true)
+        val annotatedBitmap = processedBitmap.copy(Bitmap.Config.ARGB_8888, true)
         val canvas = Canvas(annotatedBitmap)
 
         // 如果有检测到的手部数据，叠加穴位标注
@@ -540,6 +597,10 @@ class MainActivity : AppCompatActivity() {
             canvas.scale(scaleX, scaleY)
             overlayView.draw(canvas)
             canvas.restore()
+        }
+
+        if (processedBitmap != annotatedBitmap && !processedBitmap.isRecycled) {
+            processedBitmap.recycle()
         }
 
         return annotatedBitmap
@@ -558,6 +619,8 @@ class MainActivity : AppCompatActivity() {
             currentFps = (frameCount * 1000 / elapsed).toInt()
             runOnUiThread {
                 fpsText.text = "FPS: $currentFps"
+                // 更新 OverlayView 的调试信息
+                overlayView.updateDebugInfo(currentFps, landmarkSmoother.getIsStationary())
             }
             frameCount = 0
             lastFpsTimestamp = currentTime

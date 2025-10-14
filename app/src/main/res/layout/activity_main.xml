@@ -53,6 +53,16 @@
             android:text=""
             android:textColor="#FFFFFF"
             android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/hintText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/hint_palm_detection"
+            android:textColor="#FFC107"
+            android:textSize="12sp"
+            android:alpha="0.9" />
     </LinearLayout>
 
     <!-- 底部控制栏 -->

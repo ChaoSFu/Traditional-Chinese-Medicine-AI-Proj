@@ -19,9 +19,9 @@ import com.google.mediapipe.tasks.vision.handlandmarker.HandLandmarkerResult
 class HandLandmarkerHelper(
     private val context: Context,
     private val listener: HandLandmarkerListener? = null,
-    private val minDetectionConfidence: Float = 0.6f,  // 平衡检测置信度，提高响应速度
-    private val minTrackingConfidence: Float = 0.6f,   // 平衡跟踪置信度，提高响应速度
-    private val minPresenceConfidence: Float = 0.6f    // 平衡存在置信度，提高响应速度
+    private val minDetectionConfidence: Float = 0.7f,  // 提高检测置信度，减少误识别
+    private val minTrackingConfidence: Float = 0.8f,   // 提高跟踪置信度，增强稳定性
+    private val minPresenceConfidence: Float = 0.7f    // 提高存在置信度，减少点跳动
 ) {
     private var handLandmarker: HandLandmarker? = null
     private var isInitialized = false
@@ -69,7 +69,7 @@ class HandLandmarkerHelper(
 
                 val options = HandLandmarker.HandLandmarkerOptions.builder()
                     .setBaseOptions(baseOptions)
-                    .setRunningMode(RunningMode.IMAGE)  // 图像模式（实时视频流使用IMAGE模式处理每一帧）
+                    .setRunningMode(RunningMode.VIDEO)  // VIDEO模式：利用时序信息，关键点更连续稳定
                     .setNumHands(MAX_NUM_HANDS)
                     .setMinHandDetectionConfidence(minDetectionConfidence)
                     .setMinTrackingConfidence(minTrackingConfidence)
@@ -98,9 +98,10 @@ class HandLandmarkerHelper(
     /**
      * 检测手部关键点
      * @param bitmap 输入图像
+     * @param frameTimestampMs 帧时间戳（毫秒），VIDEO模式必需
      * @return 检测结果
      */
-    fun detect(bitmap: Bitmap): HandLandmarks? {
+    fun detect(bitmap: Bitmap, frameTimestampMs: Long = System.currentTimeMillis()): HandLandmarks? {
         if (!isInitialized || handLandmarker == null) {
             Log.w(TAG, "HandLandmarker not initialized")
             return null
@@ -108,7 +109,7 @@ class HandLandmarkerHelper(
 
         return try {
             val mpImage = BitmapImageBuilder(bitmap).build()
-            val result = handLandmarker?.detect(mpImage)
+            val result = handLandmarker?.detectForVideo(mpImage, frameTimestampMs)
             parseResult(result)
         } catch (e: Exception) {
             Log.e(TAG, "Error during detection", e)
@@ -120,8 +121,9 @@ class HandLandmarkerHelper(
     /**
      * 异步检测（用于视频流）
      * @param bitmap 输入图像（方法内部会负责回收）
+     * @param frameTimestampMs 帧时间戳（毫秒），VIDEO模式必需
      */
-    fun detectAsync(bitmap: Bitmap) {
+    fun detectAsync(bitmap: Bitmap, frameTimestampMs: Long = System.currentTimeMillis()) {
         if (!isInitialized || handLandmarker == null) {
             Log.w(TAG, "HandLandmarker not initialized")
             bitmap.recycle()
@@ -135,7 +137,7 @@ class HandLandmarkerHelper(
 
         try {
             val mpImage = BitmapImageBuilder(bitmap).build()
-            val result = handLandmarker?.detect(mpImage)
+            val result = handLandmarker?.detectForVideo(mpImage, frameTimestampMs)
             val handLandmarks = parseResult(result)
             listener?.onResults(handLandmarks)
         } catch (e: Exception) {

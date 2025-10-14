@@ -41,10 +41,15 @@ class LandmarkSmoother(
         // 掌部关键点（稳定，需要较少平滑）
         private val PALM_INDICES = setOf(0, 1, 5, 9, 13, 17)
 
-        // 运动检测阈值
-        private const val STATIONARY_THRESHOLD = 0.008f  // 静止阈值（平均移动小于此值认为静止）
-        private const val STATIONARY_FRAMES_REQUIRED = 5  // 需要连续多少帧静止才认为真正静止
-        private const val MOVEMENT_HISTORY_SIZE = 10  // 运动历史记录大小
+        // 运动检测阈值（优化后的参数）
+        private const val STATIONARY_THRESHOLD = 0.005f  // 静止阈值（更敏感的静止判断）
+        private const val STATIONARY_FRAMES_REQUIRED = 3  // 需要连续多少帧静止才认为真正静止（快速响应）
+        private const val MOVEMENT_HISTORY_SIZE = 8  // 运动历史记录大小（减小以提高响应）
+
+        // 平滑强度参数（区分静止和移动）
+        private const val STATIONARY_ALPHA = 0.1f  // 静止时的平滑系数（强平滑，高精度）
+        private const val MOVING_ALPHA = 0.75f  // 移动时的平滑系数（弱平滑，高响应）
+        private const val OUTLIER_THRESHOLD = 0.15f  // 异常点检测阈值（更严格）
     }
 
     /**
@@ -174,7 +179,7 @@ class LandmarkSmoother(
         current: List<HandLandmark>,
         previous: List<HandLandmark>
     ): List<HandLandmark> {
-        val threshold = 0.2f  // 20% 的相对移动被认为是正常的（提高阈值以加快响应）
+        val threshold = OUTLIER_THRESHOLD  // 使用统一的异常点阈值
 
         return current.mapIndexed { index, landmark ->
             val prev = previous[index]
@@ -269,7 +274,7 @@ class LandmarkSmoother(
             applyExponentialSmoothing(
                 averaged,
                 previousSmoothed!!,
-                0.15f  // 静止时使用很小的 alpha，强力平滑
+                STATIONARY_ALPHA  // 静止时使用很小的 alpha，强力平滑
             )
         } else {
             averaged
@@ -309,12 +314,18 @@ class LandmarkSmoother(
             applyExponentialSmoothing(
                 averaged,
                 previousSmoothed!!,
-                0.7f  // 运动时使用大的 alpha，快速响应
+                MOVING_ALPHA  // 运动时使用大的 alpha，快速响应
             )
         } else {
             averaged
         }
     }
+
+    /**
+     * 获取当前运动状态
+     * @return true = 静止，false = 运动
+     */
+    fun getIsStationary(): Boolean = isStationary
 
     /**
      * 重置滤波器状态

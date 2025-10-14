@@ -31,12 +31,14 @@ class OverlayView @JvmOverloads constructor(
         color = Color.parseColor("#F44336")  // 红色（合谷 - 手背）
         style = Paint.Style.FILL
         isAntiAlias = true
+        alpha = 220  // 半透明，减少视觉突兀
     }
 
     private val li5Paint = Paint().apply {
         color = Color.parseColor("#E91E63")  // 粉红色（阳溪 - 手背）
         style = Paint.Style.FILL
         isAntiAlias = true
+        alpha = 220  // 半透明，减少视觉突兀
     }
 
     // 手心穴位
@@ -44,12 +46,14 @@ class OverlayView @JvmOverloads constructor(
         color = Color.parseColor("#FF9800")  // 橙色（劳宫 - 手心）
         style = Paint.Style.FILL
         isAntiAlias = true
+        alpha = 220  // 半透明，减少视觉突兀
     }
 
     private val ht8Paint = Paint().apply {
         color = Color.parseColor("#FFC107")  // 琥珀色（少府 - 手心）
         style = Paint.Style.FILL
         isAntiAlias = true
+        alpha = 220  // 半透明，减少视觉突兀
     }
 
     private val textPaint = Paint().apply {
@@ -81,11 +85,24 @@ class OverlayView @JvmOverloads constructor(
     private var showLandmarks = true         // 是否显示所有关键点
     private var showConnections = true       // 是否显示骨架连接线
 
+    // 防抖动：存储上一次的穴位位置
+    private var lastLi4Position: PointF? = null
+    private var lastLi5Position: PointF? = null
+    private var lastPc8Position: PointF? = null
+    private var lastHt8Position: PointF? = null
+
+    // 调试信息
+    private var fps: Int = 0
+    private var smoothingMode: String = ""  // "静止" 或 "运动"
+
     companion object {
         private const val LANDMARK_RADIUS = 8f
         private const val ACUPOINT_RADIUS = 16f
         private const val TEXT_OFFSET_X = 20f
         private const val TEXT_OFFSET_Y = -10f
+
+        // 防抖阈值：小于此距离的变化将被忽略（归一化坐标）
+        private const val UPDATE_THRESHOLD = 0.005f
 
         // MediaPipe 手部骨架连接关系
         private val HAND_CONNECTIONS = listOf(
@@ -113,35 +130,68 @@ class OverlayView @JvmOverloads constructor(
     }
 
     /**
-     * 更新合谷穴位置（手背）
+     * 更新合谷穴位置（手背）- 带防抖
      */
     fun updateLi4Position(position: PointF?) {
-        this.li4Position = position
-        invalidate()
+        if (shouldUpdate(position, lastLi4Position)) {
+            this.li4Position = position
+            this.lastLi4Position = position?.let { PointF(it.x, it.y) }
+            invalidate()
+        }
     }
 
     /**
-     * 更新阳溪穴位置（手背）
+     * 更新阳溪穴位置（手背）- 带防抖
      */
     fun updateLi5Position(position: PointF?) {
-        this.li5Position = position
-        invalidate()
+        if (shouldUpdate(position, lastLi5Position)) {
+            this.li5Position = position
+            this.lastLi5Position = position?.let { PointF(it.x, it.y) }
+            invalidate()
+        }
     }
 
     /**
-     * 更新劳宫穴位置（手心）
+     * 更新劳宫穴位置（手心）- 带防抖
      */
     fun updatePc8Position(position: PointF?) {
-        this.pc8Position = position
-        invalidate()
+        if (shouldUpdate(position, lastPc8Position)) {
+            this.pc8Position = position
+            this.lastPc8Position = position?.let { PointF(it.x, it.y) }
+            invalidate()
+        }
     }
 
     /**
-     * 更新少府穴位置（手心）
+     * 更新少府穴位置（手心）- 带防抖
      */
     fun updateHt8Position(position: PointF?) {
-        this.ht8Position = position
-        invalidate()
+        if (shouldUpdate(position, lastHt8Position)) {
+            this.ht8Position = position
+            this.lastHt8Position = position?.let { PointF(it.x, it.y) }
+            invalidate()
+        }
+    }
+
+    /**
+     * 判断是否需要更新穴位位置（防抖）
+     * @param newPos 新位置
+     * @param lastPos 上次位置
+     * @return true表示需要更新
+     */
+    private fun shouldUpdate(newPos: PointF?, lastPos: PointF?): Boolean {
+        // 如果新位置为null，始终更新（清除显示）
+        if (newPos == null) return true
+
+        // 如果没有历史位置，始终更新
+        if (lastPos == null) return true
+
+        // 计算位置变化
+        val dx = kotlin.math.abs(newPos.x - lastPos.x)
+        val dy = kotlin.math.abs(newPos.y - lastPos.y)
+
+        // 如果变化超过阈值，才更新
+        return dx > UPDATE_THRESHOLD || dy > UPDATE_THRESHOLD
     }
 
     /**
@@ -157,6 +207,15 @@ class OverlayView @JvmOverloads constructor(
      */
     fun setShowConnections(show: Boolean) {
         this.showConnections = show
+        invalidate()
+    }
+
+    /**
+     * 更新调试信息（FPS 和平滑模式）
+     */
+    fun updateDebugInfo(fps: Int, isStationary: Boolean) {
+        this.fps = fps
+        this.smoothingMode = if (isStationary) "静止" else "运动"
         invalidate()
     }
 
@@ -241,6 +300,18 @@ class OverlayView @JvmOverloads constructor(
                 screenY + TEXT_OFFSET_Y,
                 textPaint
             )
+        }
+
+        // 5. 绘制调试信息（FPS 和平滑模式）
+        if (fps > 0 || smoothingMode.isNotEmpty()) {
+            val debugText = buildString {
+                if (fps > 0) append("FPS: $fps")
+                if (smoothingMode.isNotEmpty()) {
+                    if (isNotEmpty()) append(" | ")
+                    append("模式: $smoothingMode")
+                }
+            }
+            canvas.drawText(debugText, 20f, 60f, textPaint)
         }
     }
 

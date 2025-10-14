@@ -10,6 +10,10 @@ import com.example.traditional_chinese_medicine_ai_proj.data.HandLandmarks
  */
 object CoordinateUtils {
 
+    // 手势判断相关常量
+    private const val HIGH_CONFIDENCE_THRESHOLD = 3.0f  // 高置信度阈值（明确的抓取动作）
+    private const val CACHE_DURATION = 30  // 缓存持续帧数（约1秒）
+
     /**
      * 计算两个关键点的中点
      * Calculate midpoint between two landmarks
@@ -176,14 +180,27 @@ object CoordinateUtils {
         return point.x >= left && point.x <= right && point.y >= top && point.y <= bottom
     }
 
+    // 缓存的手势判断结果和置信度
+    private var cachedPalmFacing: Boolean? = null
+    private var cacheConfidence: Float = 0f
+    private var cacheFrameCount: Int = 0
+
     /**
-     * 判断当前是手心还是手背
+     * 判断当前是手心还是手背（增强版：结合Z坐标和手指弯曲度，支持抓取动作锁定）
      * Determine if showing palm or back of hand
      *
      * 判断逻辑：
-     * 1. 使用手指PIP关节和手腕的Z坐标差异判断
-     * 2. 手背：手指关节比手腕更靠近摄像头（Z值更大）
-     * 3. 手心：手指关节比手腕更远离摄像头（Z值更小）
+     * 1. 主要判断：使用手指PIP关节和手腕的Z坐标差异
+     * 2. 辅助判断：计算手指弯曲程度（MCP-PIP-TIP的角度）
+     * 3. 手心特征：
+     *    - Z坐标：手指关节比手腕更靠近摄像头
+     *    - 弯曲度：手指相对伸直时，指尖在MCP前方（Y坐标小）
+     * 4. 手背特征：
+     *    - Z坐标：手指关节比手腕更远离摄像头
+     *    - 弯曲度：手指弯曲时，指尖在MCP下方（Y坐标大）
+     * 5. 抓取动作锁定：
+     *    - 当检测到明确的握拳或张开手掌动作时，锁定判断结果
+     *    - 锁定期间（约1秒）以抓取动作结果为准
      *
      * @return true = 手心（palm），false = 手背（back of hand）
      */
@@ -191,28 +208,99 @@ object CoordinateUtils {
         // 获取手腕
         val wrist = landmarks.getLandmark(HandLandmarks.WRIST)
 
-        // 获取手指的近端指间关节（PIP）- 这些点在手掌弯曲时最能体现手心/手背
+        // 获取手指的关键点
+        val indexMcp = landmarks.getLandmark(HandLandmarks.INDEX_FINGER_MCP)
         val indexPip = landmarks.getLandmark(HandLandmarks.INDEX_FINGER_PIP)
+        val indexTip = landmarks.getLandmark(HandLandmarks.INDEX_FINGER_TIP)
+
+        val middleMcp = landmarks.getLandmark(HandLandmarks.MIDDLE_FINGER_MCP)
         val middlePip = landmarks.getLandmark(HandLandmarks.MIDDLE_FINGER_PIP)
+        val middleTip = landmarks.getLandmark(HandLandmarks.MIDDLE_FINGER_TIP)
+
+        val ringMcp = landmarks.getLandmark(HandLandmarks.RING_FINGER_MCP)
         val ringPip = landmarks.getLandmark(HandLandmarks.RING_FINGER_PIP)
-        val pinkyPip = landmarks.getLandmark(HandLandmarks.PINKY_PIP)
+        val ringTip = landmarks.getLandmark(HandLandmarks.RING_FINGER_TIP)
 
         // 如果关键点不完整，返回默认值（手背）
-        if (wrist == null || indexPip == null || middlePip == null ||
-            ringPip == null || pinkyPip == null) {
+        if (wrist == null || indexMcp == null || indexPip == null || indexTip == null ||
+            middleMcp == null || middlePip == null || middleTip == null ||
+            ringMcp == null || ringPip == null || ringTip == null) {
             return false
         }
 
-        // 计算手指关节的平均Z坐标
-        val fingersAvgZ = (indexPip.z + middlePip.z + ringPip.z + pinkyPip.z) / 4f
-
-        // 计算Z坐标差异
+        // ===== 判断1: Z坐标深度分析 =====
+        val fingersAvgZ = (indexPip.z + middlePip.z + ringPip.z) / 3f
         val zDiff = fingersAvgZ - wrist.z
 
-        // 手心：手指关节的Z坐标小于手腕（负值，手指离摄像头更近）
-        // 手背：手指关节的Z坐标大于手腕（正值，手指离摄像头更远）
-        // 使用阈值避免边界情况
-        return zDiff < -0.01f  // 手指关节比手腕更靠近摄像头 = 手心
+        // ===== 判断2: 手指方向分析（Y坐标） =====
+        // 计算指尖相对于掌指关节(MCP)的Y坐标偏移
+        // 手心：手指伸直时，指尖Y < MCP的Y（指向上方）
+        // 手背：手指弯曲时，指尖Y > MCP的Y（指向下方）
+        val indexYDiff = indexTip.y - indexMcp.y
+        val middleYDiff = middleTip.y - middleMcp.y
+        val ringYDiff = ringTip.y - ringMcp.y
+        val avgYDiff = (indexYDiff + middleYDiff + ringYDiff) / 3f
+
+        // ===== 判断3: 手指弯曲度（TIP距离PIP的距离） =====
+        // 手心张开时，指尖会远离PIP
+        val indexExtension = distance(
+            PointF(indexTip.x, indexTip.y),
+            PointF(indexPip.x, indexPip.y)
+        )
+        val middleExtension = distance(
+            PointF(middleTip.x, middleTip.y),
+            PointF(middlePip.x, middlePip.y)
+        )
+        val avgExtension = (indexExtension + middleExtension) / 2f
+
+        // ===== 综合判断 =====
+        // Z坐标权重更高（主要判断依据）
+        val zScore = if (zDiff < -0.005f) 1 else if (zDiff > 0.005f) -1 else 0
+
+        // Y坐标辅助判断（指尖在MCP上方 = 手心）
+        val yScore = if (avgYDiff < -0.05f) 1 else if (avgYDiff > 0.05f) -1 else 0
+
+        // 伸展度辅助判断（手指伸展 = 手心张开）
+        val extensionScore = if (avgExtension > 0.15f) 1 else 0
+
+        // 综合评分（Z坐标权重2，其他权重1）
+        val totalScore = zScore * 2 + yScore + extensionScore
+        val currentResult = totalScore > 0  // 正分 = 手心，负分 = 手背
+
+        // ===== 抓取动作检测和缓存机制 =====
+        // 计算置信度（分数的绝对值）
+        val confidence = kotlin.math.abs(totalScore.toFloat())
+
+        // 检查是否有缓存结果且还在有效期内
+        if (cachedPalmFacing != null && cacheFrameCount > 0) {
+            cacheFrameCount--
+            // 缓存有效，直接返回缓存结果
+            return cachedPalmFacing!!
+        }
+
+        // 检测到明确的抓取动作（高置信度）
+        if (confidence >= HIGH_CONFIDENCE_THRESHOLD) {
+            // 锁定判断结果
+            cachedPalmFacing = currentResult
+            cacheConfidence = confidence
+            cacheFrameCount = CACHE_DURATION
+            return currentResult
+        }
+
+        // 普通情况，清空缓存，返回当前结果
+        cachedPalmFacing = null
+        cacheConfidence = 0f
+        cacheFrameCount = 0
+        return currentResult
+    }
+
+    /**
+     * 重置手势判断缓存（切换摄像头或重新开始检测时调用）
+     */
+    fun resetPalmFacingCache() {
+        cachedPalmFacing = null
+        cacheConfidence = 0f
+        cacheFrameCount = 0
     }
 
     /**

@@ -42,4 +42,7 @@
 
     <!-- 成功消息 -->
     <string name="photo_saved_success">照片已保存到相册</string>
+
+    <!-- 提示信息 -->
+    <string name="hint_palm_detection">💡 提示：若手心/手背识别错误，可尝试握拳或张开手掌来修正</string>
 </resources>
