@@ -13,6 +13,10 @@
         android:maxSdkVersion="32" />
     <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
 
+    <!-- 网络权限 - 用于调用 ChatGPT API -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -54,6 +58,22 @@
             android:exported="false"
             android:parentActivityName=".AcupointSelectionActivity"
             android:screenOrientation="portrait" />
+
+        <!-- Chat Activity - AI Q&A -->
+        <activity
+            android:name=".ChatActivity"
+            android:exported="false"
+            android:parentActivityName=".WelcomeActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" />
+
+        <!-- Chat Settings Activity -->
+        <activity
+            android:name=".ChatSettingsActivity"
+            android:exported="false"
+            android:parentActivityName=".ChatActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" />
     </application>
 
 </manifest>

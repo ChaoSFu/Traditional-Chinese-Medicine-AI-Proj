@@ -37,7 +37,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="基于 AI 的穴位实时定位"
+            android:text="AI 穴位定位 + 智能中医问答"
             android:textColor="@android:color/darker_gray"
             android:textSize="16sp" />
 
@@ -60,7 +60,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:lineSpacingExtra="4dp"
-                    android:text="通过摄像头实时识别人体关键点，精准定位中医穴位。支持离线使用，保护您的隐私。"
+                    android:text="结合 AI 视觉识别和智能问答，为您提供专业的中医穴位定位与知识咨询服务。"
                     android:textColor="@android:color/black"
                     android:textSize="16sp" />
 
@@ -71,40 +71,81 @@
                     android:layout_marginTop="16dp"
                     android:orientation="vertical">
 
+                    <!-- 穴位定位功能 -->
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:drawablePadding="8dp"
-                        android:text="✓ 实时穴位定位"
+                        android:text="📍 穴位定位功能"
                         android:textSize="14sp"
-                        app:drawableStartCompat="@android:drawable/checkbox_on_background" />
+                        android:textStyle="bold"
+                        android:textColor="#4CAF50" />
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:drawablePadding="8dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="4dp"
+                        android:text="✓ 实时手部穴位识别"
+                        android:textSize="13sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="4dp"
                         android:text="✓ 离线运行，保护隐私"
-                        android:textSize="14sp"
-                        app:drawableStartCompat="@android:drawable/checkbox_on_background" />
+                        android:textSize="13sp" />
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:drawablePadding="8dp"
-                        android:text="✓ 详细穴位说明"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="4dp"
+                        android:text="✓ 详细穴位位置与功效"
+                        android:textSize="13sp" />
+
+                    <!-- 智能问答功能 -->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:text="🤖 AI 智能问答"
                         android:textSize="14sp"
-                        app:drawableStartCompat="@android:drawable/checkbox_on_background" />
+                        android:textStyle="bold"
+                        android:textColor="#2196F3" />
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:drawablePadding="8dp"
-                        android:text="✓ 多部位支持（持续更新）"
-                        android:textSize="14sp"
-                        app:drawableStartCompat="@android:drawable/checkbox_on_background" />
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="4dp"
+                        android:text="✓ 基于 ChatGPT 的中医知识咨询"
+                        android:textSize="13sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="4dp"
+                        android:text="✓ 支持穴位、经络、症状调理等问题"
+                        android:textSize="13sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="4dp"
+                        android:text="✓ 多模型选择（GPT-3.5/GPT-4）"
+                        android:textSize="13sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="4dp"
+                        android:text="✓ 自定义参数，个性化回答"
+                        android:textSize="13sp" />
+
                 </LinearLayout>
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
@@ -120,9 +161,19 @@
             android:layout_width="match_parent"
             android:layout_height="56dp"
             android:layout_marginTop="24dp"
-            android:text="开始使用"
+            android:text="穴位定位"
             android:textSize="18sp"
             android:textStyle="bold" />
+
+        <!-- AI Chat Button -->
+        <Button
+            android:id="@+id/btnAiChat"
+            style="@style/Widget.Material3.Button.TonalButton"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginTop="12dp"
+            android:text="🤖 中医智能问答"
+            android:textSize="16sp" />
 
         <!-- About Button -->
         <Button

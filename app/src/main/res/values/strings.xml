@@ -45,4 +45,19 @@
 
     <!-- 提示信息 -->
     <string name="hint_palm_detection">💡 提示：若手心/手背识别错误，可尝试握拳或张开手掌来修正</string>
+
+    <!-- AI 问答相关 -->
+    <string name="chat_title">中医智能问答</string>
+    <string name="chat_input_hint">请输入中医相关问题...</string>
+    <string name="chat_send">发送</string>
+    <string name="chat_clear">清空对话</string>
+    <string name="chat_settings">设置</string>
+    <string name="chat_welcome">您好！我是您的中医智能助手。您可以向我咨询穴位、经络、症状调理等相关问题。</string>
+    <string name="api_key_required">请先配置 OpenAI API Key</string>
+    <string name="api_key_dialog_title">配置 API Key</string>
+    <string name="api_key_dialog_message">请输入您的 OpenAI API Key\n\n您可以在 https://platform.openai.com/api-keys 获取</string>
+    <string name="settings_saved">设置已保存</string>
+    <string name="settings_reset">已恢复默认设置</string>
+    <string name="model_gpt35">GPT-3.5 Turbo（推荐）</string>
+    <string name="model_gpt4">GPT-4（更智能）</string>
 </resources>
