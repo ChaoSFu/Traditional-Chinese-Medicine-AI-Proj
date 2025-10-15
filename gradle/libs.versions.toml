@@ -16,6 +16,8 @@ retrofit = "2.9.0"
 okhttp = "4.12.0"
 lifecycle = "2.6.2"
 room = "2.6.1"
+markwon = "4.6.2"
+prism4j = "2.0.0"
 
 [libraries]
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -40,6 +42,13 @@ lifecycle-livedata = { group = "androidx.lifecycle", name = "lifecycle-livedata-
 room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
 room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
 room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
+markwon-core = { group = "io.noties.markwon", name = "core", version.ref = "markwon" }
+markwon-tables = { group = "io.noties.markwon", name = "ext-tables", version.ref = "markwon" }
+markwon-strikethrough = { group = "io.noties.markwon", name = "ext-strikethrough", version.ref = "markwon" }
+markwon-tasklist = { group = "io.noties.markwon", name = "ext-tasklist", version.ref = "markwon" }
+markwon-syntax = { group = "io.noties.markwon", name = "syntax-highlight", version.ref = "markwon" }
+prism4j = { group = "io.noties", name = "prism4j", version.ref = "prism4j" }
+prism4j-bundler = { group = "io.noties", name = "prism4j-bundler", version.ref = "prism4j" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

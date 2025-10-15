@@ -9,6 +9,10 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.traditional_chinese_medicine_ai_proj.R
 import com.example.traditional_chinese_medicine_ai_proj.api.MessageUI
+import io.noties.markwon.Markwon
+import io.noties.markwon.ext.strikethrough.StrikethroughPlugin
+import io.noties.markwon.ext.tables.TablePlugin
+import io.noties.markwon.ext.tasklist.TaskListPlugin
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -77,8 +81,16 @@ class ChatAdapter : ListAdapter<MessageUI, RecyclerView.ViewHolder>(MessageDiffC
         private val messageText: TextView = itemView.findViewById(R.id.messageText)
         private val timeText: TextView = itemView.findViewById(R.id.timeText)
 
+        private val markwon: Markwon by lazy {
+            Markwon.builder(itemView.context)
+                .usePlugin(TablePlugin.create(itemView.context))
+                .usePlugin(StrikethroughPlugin.create())
+                .usePlugin(TaskListPlugin.create(itemView.context))
+                .build()
+        }
+
         fun bind(message: MessageUI) {
-            messageText.text = message.content
+            markwon.setMarkdown(messageText, message.content)
             timeText.text = formatTime(message.timestamp)
         }
     }

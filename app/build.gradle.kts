@@ -39,6 +39,10 @@ android {
     }
 }
 
+configurations.all {
+    exclude(group = "org.jetbrains", module = "annotations-java5")
+}
+
 dependencies {
     implementation(libs.appcompat)
     implementation(libs.material)
@@ -71,6 +75,12 @@ dependencies {
     implementation(libs.room.runtime)
     implementation(libs.room.ktx)
     ksp(libs.room.compiler)
+
+    // Markdown rendering
+    implementation(libs.markwon.core)
+    implementation(libs.markwon.tables)
+    implementation(libs.markwon.strikethrough)
+    implementation(libs.markwon.tasklist)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
