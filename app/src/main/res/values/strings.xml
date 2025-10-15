@@ -1,11 +1,11 @@
 <resources>
-    <string name="app_name">中医手部穴位定位</string>
+    <string name="app_name">中医穴位定位</string>
 
     <!-- 状态文本 -->
     <string name="status_initializing">正在初始化…</string>
     <string name="status_ready">就绪</string>
     <string name="status_detecting">检测中</string>
-    <string name="status_no_hand_detected">未检测到手部</string>
+    <string name="status_no_hand_detected">未检测到目标</string>
     <string name="status_error">初始化失败</string>
 
     <!-- 按钮文本 -->
@@ -17,7 +17,7 @@
     <string name="btn_take_photo">拍照</string>
 
     <!-- 穴位名称 -->
-    <!-- 手背穴位 -->
+    <!-- 手部穴位 - 手背 -->
     <string name="acupoint_li4_name">合谷</string>
     <string name="acupoint_li4_code">LI4</string>
     <string name="acupoint_li4_location">手背，第1、2掌骨之间</string>
@@ -25,7 +25,7 @@
     <string name="acupoint_li5_code">LI5</string>
     <string name="acupoint_li5_location">手背，腕背横纹桡侧凹陷处</string>
 
-    <!-- 手心穴位 -->
+    <!-- 手部穴位 - 手心 -->
     <string name="acupoint_pc8_name">劳宫</string>
     <string name="acupoint_pc8_code">PC8</string>
     <string name="acupoint_pc8_location">手心，第2、3掌骨之间</string>

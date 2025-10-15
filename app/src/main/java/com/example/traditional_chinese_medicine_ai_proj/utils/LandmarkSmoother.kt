@@ -46,10 +46,15 @@ class LandmarkSmoother(
         private const val STATIONARY_FRAMES_REQUIRED = 3  // 需要连续多少帧静止才认为真正静止（快速响应）
         private const val MOVEMENT_HISTORY_SIZE = 8  // 运动历史记录大小（减小以提高响应）
 
-        // 平滑强度参数（区分静止和移动）
-        private const val STATIONARY_ALPHA = 0.1f  // 静止时的平滑系数（强平滑，高精度）
-        private const val MOVING_ALPHA = 0.75f  // 移动时的平滑系数（弱平滑，高响应）
-        private const val OUTLIER_THRESHOLD = 0.15f  // 异常点检测阈值（更严格）
+        // 平滑强度参数（简化版，单一alpha值）
+        private const val SMOOTH_ALPHA = 0.7f  // 平滑系数（性能优先）
+        private const val OUTLIER_THRESHOLD = 0.15f  // 异常点检测阈值
+
+        // 死区机制：低于此阈值的微小变化将被忽略（减少高频抖动）
+        private const val DEAD_ZONE = 0.005f  // 稍微放宽以提升性能
+
+        // 帧间异常过滤：若关键点变化速度超过阈值则判定为异常
+        private const val MAX_FRAME_VELOCITY = 0.08f  // 放宽到8%，减少误判
     }
 
     /**
@@ -75,21 +80,24 @@ class LandmarkSmoother(
             return handLandmarks
         }
 
-        // 检测运动状态
-        val movementSpeed = if (previousSmoothed != null) {
-            calculateMovementSpeed(currentLandmarks, previousSmoothed!!)
-        } else {
-            0f
+        // 帧间异常检测：若速度过快则回退到上一帧
+        if (previousSmoothed != null) {
+            val maxVelocity = calculateMaxVelocity(currentLandmarks, previousSmoothed!!)
+            if (maxVelocity > MAX_FRAME_VELOCITY) {
+                // 异常跳点，直接返回上一帧的结果
+                return HandLandmarks(
+                    landmarks = previousSmoothed!!,
+                    handedness = handLandmarks.handedness
+                )
+            }
         }
-        updateMovementState(movementSpeed)
 
-        // 根据运动状态选择不同的处理策略
-        val smoothed = if (isStationary) {
-            // 静止状态：使用强平滑，提高精度
-            processStationaryState(currentLandmarks)
+        // 简化版平滑：直接应用EMA，无需复杂的运动状态检测
+        val smoothed = if (previousSmoothed != null) {
+            // 应用指数平滑
+            applyExponentialSmoothing(currentLandmarks, previousSmoothed!!, SMOOTH_ALPHA)
         } else {
-            // 运动状态：使用轻平滑，快速响应
-            processMovingState(currentLandmarks)
+            currentLandmarks
         }
 
         previousSmoothed = smoothed
@@ -163,10 +171,15 @@ class LandmarkSmoother(
                 else -> alpha
             }
 
+            // 死区机制：微小变化直接使用上一帧的值
+            val dx = kotlin.math.abs(landmark.x - prev.x)
+            val dy = kotlin.math.abs(landmark.y - prev.y)
+            val dz = kotlin.math.abs(landmark.z - prev.z)
+
             HandLandmark(
-                x = adjustedAlpha * landmark.x + (1 - adjustedAlpha) * prev.x,
-                y = adjustedAlpha * landmark.y + (1 - adjustedAlpha) * prev.y,
-                z = adjustedAlpha * landmark.z + (1 - adjustedAlpha) * prev.z
+                x = if (dx < DEAD_ZONE) prev.x else adjustedAlpha * landmark.x + (1 - adjustedAlpha) * prev.x,
+                y = if (dy < DEAD_ZONE) prev.y else adjustedAlpha * landmark.y + (1 - adjustedAlpha) * prev.y,
+                z = if (dz < DEAD_ZONE) prev.z else adjustedAlpha * landmark.z + (1 - adjustedAlpha) * prev.z
             )
         }
     }
@@ -204,6 +217,27 @@ class LandmarkSmoother(
                 landmark
             }
         }
+    }
+
+    /**
+     * 计算最大移动速度（用于异常检测）
+     */
+    private fun calculateMaxVelocity(
+        current: List<HandLandmark>,
+        previous: List<HandLandmark>
+    ): Float {
+        var maxDistance = 0f
+        current.forEachIndexed { index, landmark ->
+            val prev = previous[index]
+            val distance = kotlin.math.sqrt(
+                (landmark.x - prev.x) * (landmark.x - prev.x) +
+                (landmark.y - prev.y) * (landmark.y - prev.y)
+            )
+            if (distance > maxDistance) {
+                maxDistance = distance
+            }
+        }
+        return maxDistance
     }
 
     /**
@@ -274,7 +308,7 @@ class LandmarkSmoother(
             applyExponentialSmoothing(
                 averaged,
                 previousSmoothed!!,
-                STATIONARY_ALPHA  // 静止时使用很小的 alpha，强力平滑
+                0.1f  // 静止时使用很小的 alpha，强力平滑
             )
         } else {
             averaged
@@ -314,7 +348,7 @@ class LandmarkSmoother(
             applyExponentialSmoothing(
                 averaged,
                 previousSmoothed!!,
-                MOVING_ALPHA  // 运动时使用大的 alpha，快速响应
+                SMOOTH_ALPHA  // 运动时使用大的 alpha，快速响应
             )
         } else {
             averaged

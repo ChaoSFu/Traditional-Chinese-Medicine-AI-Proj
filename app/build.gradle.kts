@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace = "com.example.traditional_chinese_medicine_ai_proj"
-    compileSdk = 34
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "com.example.traditional_chinese_medicine_ai_proj"
@@ -54,6 +54,7 @@ dependencies {
 
     // Gson for JSON parsing
     implementation(libs.gson)
+    implementation(libs.core.ktx)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)

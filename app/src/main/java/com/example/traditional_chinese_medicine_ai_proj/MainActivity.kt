@@ -187,10 +187,9 @@ class MainActivity : AppCompatActivity() {
             context = this,
             listener = object : HandLandmarkerHelper.HandLandmarkerListener {
                 override fun onResults(result: HandLandmarks?) {
-                    // 应用平滑滤波
-                    val smoothedResult = landmarkSmoother.smooth(result)
+                    // 临时禁用平滑处理以测试性能
                     runOnUiThread {
-                        updateUI(smoothedResult)
+                        updateUI(result)
                     }
                 }
 
@@ -259,8 +258,8 @@ class MainActivity : AppCompatActivity() {
             .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
             .setOutputImageFormat(ImageAnalysis.OUTPUT_IMAGE_FORMAT_RGBA_8888)
             .build()
-            .also {
-                it.setAnalyzer(cameraExecutor) { imageProxy ->
+            .also { analyzer ->
+                analyzer.setAnalyzer(cameraExecutor) { imageProxy ->
                     processImage(imageProxy)
                 }
             }
@@ -290,6 +289,25 @@ class MainActivity : AppCompatActivity() {
                 imageAnalyzer,
                 imageCapture
             )
+
+            // 优化摄像头控制：锁定曝光、降低反光与掌纹误检
+            camera?.let { cam ->
+                // 设置曝光补偿（稍微降低以避免过曝）
+                val exposureState = cam.cameraInfo.exposureState
+                if (exposureState.isExposureCompensationSupported) {
+                    // 降低1档曝光，减少反光
+                    val compensationIndex = (exposureState.exposureCompensationRange.lower + 1).coerceAtMost(0)
+                    cam.cameraControl.setExposureCompensationIndex(compensationIndex)
+                }
+
+                // 锁定自动曝光（AE Lock）避免光照变化导致帧间差异
+                // 注意：并非所有设备都支持，需要优雅降级
+                try {
+                    cam.cameraControl.setExposureCompensationIndex(0)
+                } catch (e: Exception) {
+                    Log.w(TAG, "AE lock not supported: ${e.message}")
+                }
+            }
 
             Log.d(TAG, "Camera bound successfully")
         } catch (e: Exception) {
@@ -342,32 +360,18 @@ class MainActivity : AppCompatActivity() {
                     rotatedBitmap
                 }
 
-                // 第三步：缩放到 512x512 提高检测精度
-                val targetSize = 512
-                val scaledBitmap = Bitmap.createScaledBitmap(
-                    mirroredBitmap,
-                    targetSize,
-                    targetSize,
-                    true  // 使用双线性插值获得更好的质量
-                )
+                // 第三步：缩放到极低分辨率（480×480）解决严重卡顿
+                val targetSize = 480
+                val scaledBitmap = Bitmap.createScaledBitmap(mirroredBitmap, targetSize, targetSize, false)
                 if (scaledBitmap != mirroredBitmap) {
                     mirroredBitmap.recycle()
                 }
 
-                // 第四步：图像增强（可选）
-                val processedBitmap = if (enableImageEnhancement) {
-                    // 使用专门优化手部检测的增强方法
-                    val enhanced = ImagePreprocessor.enhanceForHandDetection(scaledBitmap)
-                    scaledBitmap.recycle()
-                    enhanced
-                } else {
-                    scaledBitmap
-                }
+                // 直接使用缩放后的图像，无任何增强
+                val processedBitmap = scaledBitmap
 
                 // 执行检测（processedBitmap 将在 detectAsync 内部被回收）
-                // VIDEO 模式需要传入帧时间戳
-                val frameTimestampMs = System.currentTimeMillis()
-                handLandmarkerHelper.detectAsync(processedBitmap, frameTimestampMs)
+                handLandmarkerHelper.detectAsync(processedBitmap)
 
                 // 计算FPS
                 calculateFps()

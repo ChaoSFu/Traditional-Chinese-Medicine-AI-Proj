@@ -25,7 +25,7 @@ class BodyPartSelectionActivity : AppCompatActivity() {
         val toolbar = findViewById<MaterialToolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.title = "选择身体部位"
+        supportActionBar?.title = "中医穴位定位 - 选择部位"
 
         // 初始化 RecyclerView
         recyclerView = findViewById(R.id.recyclerViewBodyParts)

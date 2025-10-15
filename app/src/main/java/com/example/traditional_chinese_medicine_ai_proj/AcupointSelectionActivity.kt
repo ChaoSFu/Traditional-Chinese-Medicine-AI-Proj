@@ -34,7 +34,12 @@ class AcupointSelectionActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.title = when (bodyPart) {
-            "hand" -> "手部穴位选择"
+            "hand" -> "手部穴位"
+            "foot" -> "足部穴位"
+            "ear" -> "耳部穴位"
+            "head" -> "头部穴位"
+            "back" -> "背部穴位"
+            "abdomen" -> "腹部穴位"
             else -> "穴位选择"
         }
 
