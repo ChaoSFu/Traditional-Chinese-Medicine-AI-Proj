@@ -1,0 +1,53 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="120dp"
+    android:height="120dp"
+    android:viewportWidth="120"
+    android:viewportHeight="120">
+
+    <!-- 背景圆 -->
+    <path
+        android:fillColor="#FFF3E0"
+        android:pathData="M60,60m-55,0a55,55 0,1 1,110 0a55,55 0,1 1,-110 0"/>
+
+    <!-- 罐子主体 -->
+    <path
+        android:fillColor="#FFA726"
+        android:pathData="M40,45 L80,45 L80,80 Q80,85 75,85 L45,85 Q40,85 40,80 Z"/>
+
+    <!-- 罐子盖子 -->
+    <path
+        android:fillColor="#FF8A65"
+        android:pathData="M38,40 L82,40 L80,45 L40,45 Z"/>
+    <path
+        android:fillColor="#FF7043"
+        android:pathData="M45,35 L75,35 L76,40 L44,40 Z"/>
+    <!-- 盖子把手 -->
+    <path
+        android:fillColor="#D84315"
+        android:pathData="M57,32 L63,32 L62,35 L58,35 Z"/>
+
+    <!-- 标签 -->
+    <path
+        android:fillColor="#FFCC80"
+        android:pathData="M45,55 L75,55 L75,72 L45,72 Z"/>
+
+    <!-- 标签文字装饰 -->
+    <path
+        android:fillColor="#E65100"
+        android:pathData="M50,60 L70,60 L70,62 L50,62 Z"/>
+    <path
+        android:fillColor="#E65100"
+        android:pathData="M50,65 L65,65 L65,67 L50,67 Z"/>
+
+    <!-- 红枣 -->
+    <path
+        android:fillColor="#D32F2F"
+        android:pathData="M52,25 m-3.5,0 a3.5,3.5 0,1 1,7 0 a3.5,3.5 0,1 1,-7 0"/>
+    <!-- 枸杞 -->
+    <path
+        android:fillColor="#FF5722"
+        android:pathData="M62,22 m-2.5,0 a2.5,2.5 0,1 1,5 0 a2.5,2.5 0,1 1,-5 0"/>
+    <path
+        android:fillColor="#FF5722"
+        android:pathData="M68,26 m-2.5,0 a2.5,2.5 0,1 1,5 0 a2.5,2.5 0,1 1,-5 0"/>
+</vector>

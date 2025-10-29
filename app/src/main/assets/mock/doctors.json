@@ -1,0 +1,511 @@
+[
+  {
+    "id": 1,
+    "name": "张静",
+    "avatar": "",
+    "dept": "针灸科",
+    "title": "副主任医师",
+    "specialty": "失眠、颈椎病、腰腿痛",
+    "years": 15,
+    "rating": 4.8,
+    "education": "北京中医药大学博士",
+    "intro": "从事针灸临床工作15年，擅长运用传统针灸结合现代康复技术治疗颈肩腰腿痛、失眠等病症。主持多项省级课题，发表学术论文20余篇。",
+    "schedule": [
+      {
+        "date": "2025-10-28",
+        "dayOfWeek": "周二",
+        "timeSlots": [
+          {"time": "08:00", "available": true, "isBooked": false},
+          {"time": "09:00", "available": true, "isBooked": true},
+          {"time": "10:00", "available": true, "isBooked": false},
+          {"time": "11:00", "available": true, "isBooked": false},
+          {"time": "14:00", "available": true, "isBooked": true},
+          {"time": "15:00", "available": true, "isBooked": true},
+          {"time": "16:00", "available": true, "isBooked": false},
+          {"time": "17:00", "available": true, "isBooked": false}
+        ]
+      },
+      {
+        "date": "2025-10-29",
+        "dayOfWeek": "周三",
+        "timeSlots": [
+          {"time": "08:00", "available": true, "isBooked": false},
+          {"time": "09:00", "available": true, "isBooked": false},
+          {"time": "10:00", "available": true, "isBooked": true},
+          {"time": "11:00", "available": true, "isBooked": false},
+          {"time": "14:00", "available": true, "isBooked": false},
+          {"time": "15:00", "available": true, "isBooked": false},
+          {"time": "16:00", "available": true, "isBooked": false},
+          {"time": "17:00", "available": true, "isBooked": false}
+        ]
+      },
+      {
+        "date": "2025-10-30",
+        "dayOfWeek": "周四",
+        "timeSlots": [
+          {"time": "08:00", "available": true, "isBooked": false},
+          {"time": "09:00", "available": true, "isBooked": false},
+          {"time": "10:00", "available": true, "isBooked": false},
+          {"time": "11:00", "available": true, "isBooked": false},
+          {"time": "14:00", "available": true, "isBooked": false},
+          {"time": "15:00", "available": true, "isBooked": false},
+          {"time": "16:00", "available": true, "isBooked": true},
+          {"time": "17:00", "available": true, "isBooked": false},
+          {"time": "18:00", "available": true, "isBooked": false},
+          {"time": "19:00", "available": true, "isBooked": true},
+          {"time": "20:00", "available": true, "isBooked": false}
+        ]
+      },
+      {
+        "date": "2025-10-31",
+        "dayOfWeek": "周五",
+        "timeSlots": [
+          {"time": "08:00", "available": true, "isBooked": true},
+          {"time": "09:00", "available": true, "isBooked": true},
+          {"time": "10:00", "available": true, "isBooked": false},
+          {"time": "11:00", "available": true, "isBooked": true},
+          {"time": "14:00", "available": true, "isBooked": false},
+          {"time": "15:00", "available": true, "isBooked": false},
+          {"time": "16:00", "available": true, "isBooked": true},
+          {"time": "17:00", "available": true, "isBooked": false}
+        ]
+      },
+      {
+        "date": "2025-11-01",
+        "dayOfWeek": "周六",
+        "timeSlots": [
+          {"time": "08:00", "available": true, "isBooked": false},
+          {"time": "09:00", "available": true, "isBooked": true},
+          {"time": "10:00", "available": true, "isBooked": false},
+          {"time": "11:00", "available": true, "isBooked": false}
+        ]
+      },
+      {
+        "date": "2025-11-03",
+        "dayOfWeek": "周一",
+        "timeSlots": [
+          {"time": "08:00", "available": true, "isBooked": false},
+          {"time": "09:00", "available": true, "isBooked": false},
+          {"time": "10:00", "available": true, "isBooked": false},
+          {"time": "11:00", "available": true, "isBooked": false},
+          {"time": "14:00", "available": true, "isBooked": false},
+          {"time": "15:00", "available": true, "isBooked": false},
+          {"time": "16:00", "available": true, "isBooked": false},
+          {"time": "17:00", "available": true, "isBooked": false}
+        ]
+      },
+      {
+        "date": "2025-11-04",
+        "dayOfWeek": "周二",
+        "timeSlots": [
+          {"time": "08:00", "available": true, "isBooked": false},
+          {"time": "09:00", "available": true, "isBooked": false},
+          {"time": "10:00", "available": true, "isBooked": false},
+          {"time": "11:00", "available": true, "isBooked": false},
+          {"time": "14:00", "available": true, "isBooked": false},
+          {"time": "15:00", "available": true, "isBooked": false},
+          {"time": "16:00", "available": true, "isBooked": false},
+          {"time": "17:00", "available": true, "isBooked": false}
+        ]
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "name": "李慧",
+    "avatar": "",
+    "dept": "妇科",
+    "title": "主治医师",
+    "specialty": "月经不调、气血亏虚、痛经",
+    "years": 10,
+    "rating": 4.9,
+    "education": "上海中医药大学硕士",
+    "intro": "专注女性健康调理，擅长运用中药配合食疗改善月经不调、备孕调理等妇科问题。临床经验丰富，深受患者信赖。",
+    "schedule": [
+      {
+        "date": "2025-10-28",
+        "dayOfWeek": "周二",
+        "timeSlots": [
+          {"time": "08:00", "available": true, "isBooked": true},
+          {"time": "09:00", "available": true, "isBooked": true},
+          {"time": "10:00", "available": true, "isBooked": false},
+          {"time": "11:00", "available": true, "isBooked": true},
+          {"time": "14:00", "available": true, "isBooked": false},
+          {"time": "15:00", "available": true, "isBooked": false},
+          {"time": "16:00", "available": true, "isBooked": false},
+          {"time": "17:00", "available": true, "isBooked": false}
+        ]
+      },
+      {
+        "date": "2025-10-29",
+        "dayOfWeek": "周三",
+        "timeSlots": [
+          {"time": "14:00", "available": true, "isBooked": false},
+          {"time": "15:00", "available": true, "isBooked": true},
+          {"time": "16:00", "available": true, "isBooked": false},
+          {"time": "17:00", "available": true, "isBooked": false},
+          {"time": "18:00", "available": true, "isBooked": false},
+          {"time": "19:00", "available": true, "isBooked": false},
+          {"time": "20:00", "available": true, "isBooked": false}
+        ]
+      },
+      {
+        "date": "2025-10-30",
+        "dayOfWeek": "周四",
+        "timeSlots": [
+          {"time": "08:00", "available": true, "isBooked": false},
+          {"time": "09:00", "available": true, "isBooked": false},
+          {"time": "10:00", "available": true, "isBooked": false},
+          {"time": "11:00", "available": true, "isBooked": false},
+          {"time": "14:00", "available": true, "isBooked": false},
+          {"time": "15:00", "available": true, "isBooked": false},
+          {"time": "16:00", "available": true, "isBooked": false},
+          {"time": "17:00", "available": true, "isBooked": false}
+        ]
+      },
+      {
+        "date": "2025-10-31",
+        "dayOfWeek": "周五",
+        "timeSlots": [
+          {"time": "08:00", "available": true, "isBooked": true},
+          {"time": "09:00", "available": true, "isBooked": true},
+          {"time": "10:00", "available": true, "isBooked": true},
+          {"time": "11:00", "available": true, "isBooked": false},
+          {"time": "14:00", "available": true, "isBooked": true},
+          {"time": "15:00", "available": true, "isBooked": false},
+          {"time": "16:00", "available": true, "isBooked": false},
+          {"time": "17:00", "available": true, "isBooked": true}
+        ]
+      },
+      {
+        "date": "2025-11-03",
+        "dayOfWeek": "周一",
+        "timeSlots": [
+          {"time": "08:00", "available": true, "isBooked": false},
+          {"time": "09:00", "available": true, "isBooked": false},
+          {"time": "10:00", "available": true, "isBooked": false},
+          {"time": "11:00", "available": true, "isBooked": false},
+          {"time": "14:00", "available": true, "isBooked": false},
+          {"time": "15:00", "available": true, "isBooked": false},
+          {"time": "16:00", "available": true, "isBooked": false},
+          {"time": "17:00", "available": true, "isBooked": false}
+        ]
+      },
+      {
+        "date": "2025-11-04",
+        "dayOfWeek": "周二",
+        "timeSlots": [
+          {"time": "08:00", "available": true, "isBooked": false},
+          {"time": "09:00", "available": true, "isBooked": false},
+          {"time": "10:00", "available": true, "isBooked": false},
+          {"time": "11:00", "available": true, "isBooked": false},
+          {"time": "14:00", "available": true, "isBooked": false},
+          {"time": "15:00", "available": true, "isBooked": false},
+          {"time": "16:00", "available": true, "isBooked": false},
+          {"time": "17:00", "available": true, "isBooked": false},
+          {"time": "18:00", "available": true, "isBooked": false},
+          {"time": "19:00", "available": true, "isBooked": false},
+          {"time": "20:00", "available": true, "isBooked": false}
+        ]
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "name": "王明",
+    "avatar": "",
+    "dept": "推拿科",
+    "title": "主任医师",
+    "specialty": "小儿推拿、运动损伤",
+    "years": 20,
+    "rating": 4.7,
+    "education": "广州中医药大学博士",
+    "intro": "二十年推拿从业经验，精通小儿推拿、运动损伤康复。多次参与国家级运动队医疗保障工作。",
+    "schedule": [
+      {
+        "date": "2025-10-28",
+        "dayOfWeek": "周二",
+        "timeSlots": [
+          {"time": "08:00", "available": true, "isBooked": true},
+          {"time": "09:00", "available": true, "isBooked": false},
+          {"time": "10:00", "available": true, "isBooked": true},
+          {"time": "11:00", "available": true, "isBooked": false},
+          {"time": "14:00", "available": true, "isBooked": false},
+          {"time": "15:00", "available": true, "isBooked": true},
+          {"time": "16:00", "available": true, "isBooked": true},
+          {"time": "17:00", "available": true, "isBooked": false}
+        ]
+      },
+      {
+        "date": "2025-10-29",
+        "dayOfWeek": "周三",
+        "timeSlots": [
+          {"time": "08:00", "available": true, "isBooked": false},
+          {"time": "09:00", "available": true, "isBooked": false},
+          {"time": "10:00", "available": true, "isBooked": true},
+          {"time": "11:00", "available": true, "isBooked": false}
+        ]
+      },
+      {
+        "date": "2025-10-30",
+        "dayOfWeek": "周四",
+        "timeSlots": [
+          {"time": "08:00", "available": true, "isBooked": false},
+          {"time": "09:00", "available": true, "isBooked": false},
+          {"time": "10:00", "available": true, "isBooked": false},
+          {"time": "11:00", "available": true, "isBooked": false},
+          {"time": "14:00", "available": true, "isBooked": false},
+          {"time": "15:00", "available": true, "isBooked": false},
+          {"time": "16:00", "available": true, "isBooked": true},
+          {"time": "17:00", "available": true, "isBooked": false}
+        ]
+      },
+      {
+        "date": "2025-10-31",
+        "dayOfWeek": "周五",
+        "timeSlots": [
+          {"time": "08:00", "available": true, "isBooked": true},
+          {"time": "09:00", "available": true, "isBooked": false},
+          {"time": "10:00", "available": true, "isBooked": true},
+          {"time": "11:00", "available": true, "isBooked": false}
+        ]
+      },
+      {
+        "date": "2025-11-01",
+        "dayOfWeek": "周六",
+        "timeSlots": [
+          {"time": "08:00", "available": true, "isBooked": false},
+          {"time": "09:00", "available": true, "isBooked": true},
+          {"time": "10:00", "available": true, "isBooked": false},
+          {"time": "11:00", "available": true, "isBooked": false},
+          {"time": "14:00", "available": true, "isBooked": false},
+          {"time": "15:00", "available": true, "isBooked": false},
+          {"time": "16:00", "available": true, "isBooked": false},
+          {"time": "17:00", "available": true, "isBooked": false}
+        ]
+      },
+      {
+        "date": "2025-11-03",
+        "dayOfWeek": "周一",
+        "timeSlots": [
+          {"time": "08:00", "available": true, "isBooked": false},
+          {"time": "09:00", "available": true, "isBooked": false},
+          {"time": "10:00", "available": true, "isBooked": false},
+          {"time": "11:00", "available": true, "isBooked": false},
+          {"time": "14:00", "available": true, "isBooked": false},
+          {"time": "15:00", "available": true, "isBooked": false},
+          {"time": "16:00", "available": true, "isBooked": false},
+          {"time": "17:00", "available": true, "isBooked": false}
+        ]
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "name": "陈芳",
+    "avatar": "",
+    "dept": "内科",
+    "title": "主任医师",
+    "specialty": "脾胃病、慢性咳嗽、糖尿病",
+    "years": 18,
+    "rating": 4.9,
+    "education": "南京中医药大学博士",
+    "intro": "擅长调理脾胃疾病、慢性咳嗽及糖尿病的中医治疗。注重辨证施治，疗效显著。",
+    "schedule": [
+      {
+        "date": "2025-10-28",
+        "dayOfWeek": "周二",
+        "timeSlots": [
+          {"time": "08:00", "available": true, "isBooked": true},
+          {"time": "09:00", "available": true, "isBooked": true},
+          {"time": "10:00", "available": true, "isBooked": false},
+          {"time": "11:00", "available": true, "isBooked": true},
+          {"time": "14:00", "available": true, "isBooked": false},
+          {"time": "15:00", "available": true, "isBooked": true},
+          {"time": "16:00", "available": true, "isBooked": false},
+          {"time": "17:00", "available": true, "isBooked": false}
+        ]
+      },
+      {
+        "date": "2025-10-29",
+        "dayOfWeek": "周三",
+        "timeSlots": [
+          {"time": "08:00", "available": true, "isBooked": false},
+          {"time": "09:00", "available": true, "isBooked": false},
+          {"time": "10:00", "available": true, "isBooked": true},
+          {"time": "11:00", "available": true, "isBooked": false},
+          {"time": "14:00", "available": true, "isBooked": false},
+          {"time": "15:00", "available": true, "isBooked": false},
+          {"time": "16:00", "available": true, "isBooked": false},
+          {"time": "17:00", "available": true, "isBooked": false},
+          {"time": "18:00", "available": true, "isBooked": false},
+          {"time": "19:00", "available": true, "isBooked": false},
+          {"time": "20:00", "available": true, "isBooked": false}
+        ]
+      },
+      {
+        "date": "2025-10-30",
+        "dayOfWeek": "周四",
+        "timeSlots": [
+          {"time": "08:00", "available": true, "isBooked": false},
+          {"time": "09:00", "available": true, "isBooked": false},
+          {"time": "10:00", "available": true, "isBooked": false},
+          {"time": "11:00", "available": true, "isBooked": false},
+          {"time": "14:00", "available": true, "isBooked": false},
+          {"time": "15:00", "available": true, "isBooked": true},
+          {"time": "16:00", "available": true, "isBooked": false},
+          {"time": "17:00", "available": true, "isBooked": false}
+        ]
+      },
+      {
+        "date": "2025-10-31",
+        "dayOfWeek": "周五",
+        "timeSlots": [
+          {"time": "08:00", "available": true, "isBooked": true},
+          {"time": "09:00", "available": true, "isBooked": true},
+          {"time": "10:00", "available": true, "isBooked": true},
+          {"time": "11:00", "available": true, "isBooked": false},
+          {"time": "14:00", "available": true, "isBooked": false},
+          {"time": "15:00", "available": true, "isBooked": true},
+          {"time": "16:00", "available": true, "isBooked": false},
+          {"time": "17:00", "available": true, "isBooked": false}
+        ]
+      },
+      {
+        "date": "2025-11-01",
+        "dayOfWeek": "周六",
+        "timeSlots": [
+          {"time": "08:00", "available": true, "isBooked": false},
+          {"time": "09:00", "available": true, "isBooked": true},
+          {"time": "10:00", "available": true, "isBooked": false},
+          {"time": "11:00", "available": true, "isBooked": false}
+        ]
+      },
+      {
+        "date": "2025-11-03",
+        "dayOfWeek": "周一",
+        "timeSlots": [
+          {"time": "08:00", "available": true, "isBooked": false},
+          {"time": "09:00", "available": true, "isBooked": false},
+          {"time": "10:00", "available": true, "isBooked": false},
+          {"time": "11:00", "available": true, "isBooked": false},
+          {"time": "14:00", "available": true, "isBooked": false},
+          {"time": "15:00", "available": true, "isBooked": false},
+          {"time": "16:00", "available": true, "isBooked": false},
+          {"time": "17:00", "available": true, "isBooked": false}
+        ]
+      },
+      {
+        "date": "2025-11-04",
+        "dayOfWeek": "周二",
+        "timeSlots": [
+          {"time": "08:00", "available": true, "isBooked": false},
+          {"time": "09:00", "available": true, "isBooked": false},
+          {"time": "10:00", "available": true, "isBooked": false},
+          {"time": "11:00", "available": true, "isBooked": false},
+          {"time": "14:00", "available": true, "isBooked": false},
+          {"time": "15:00", "available": true, "isBooked": false},
+          {"time": "16:00", "available": true, "isBooked": false},
+          {"time": "17:00", "available": true, "isBooked": false}
+        ]
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "name": "刘建国",
+    "avatar": "",
+    "dept": "骨伤科",
+    "title": "副主任医师",
+    "specialty": "骨折、关节炎、腰椎间盘突出",
+    "years": 12,
+    "rating": 4.6,
+    "education": "成都中医药大学硕士",
+    "intro": "专注骨伤疾病的中西医结合治疗，擅长正骨手法及中药内外治疗关节炎、腰椎疾病。",
+    "schedule": [
+      {
+        "date": "2025-10-28",
+        "dayOfWeek": "周二",
+        "timeSlots": [
+          {"time": "08:00", "available": true, "isBooked": false},
+          {"time": "09:00", "available": true, "isBooked": true},
+          {"time": "10:00", "available": true, "isBooked": false},
+          {"time": "11:00", "available": true, "isBooked": false}
+        ]
+      },
+      {
+        "date": "2025-10-29",
+        "dayOfWeek": "周三",
+        "timeSlots": [
+          {"time": "08:00", "available": true, "isBooked": false},
+          {"time": "09:00", "available": true, "isBooked": true},
+          {"time": "10:00", "available": true, "isBooked": false},
+          {"time": "11:00", "available": true, "isBooked": false},
+          {"time": "14:00", "available": true, "isBooked": false},
+          {"time": "15:00", "available": true, "isBooked": false},
+          {"time": "16:00", "available": true, "isBooked": false},
+          {"time": "17:00", "available": true, "isBooked": false}
+        ]
+      },
+      {
+        "date": "2025-10-30",
+        "dayOfWeek": "周四",
+        "timeSlots": [
+          {"time": "08:00", "available": true, "isBooked": true},
+          {"time": "09:00", "available": true, "isBooked": false},
+          {"time": "10:00", "available": true, "isBooked": true},
+          {"time": "11:00", "available": true, "isBooked": false},
+          {"time": "14:00", "available": true, "isBooked": false},
+          {"time": "15:00", "available": true, "isBooked": false},
+          {"time": "16:00", "available": true, "isBooked": false},
+          {"time": "17:00", "available": true, "isBooked": true},
+          {"time": "18:00", "available": true, "isBooked": false},
+          {"time": "19:00", "available": true, "isBooked": false},
+          {"time": "20:00", "available": true, "isBooked": false}
+        ]
+      },
+      {
+        "date": "2025-10-31",
+        "dayOfWeek": "周五",
+        "timeSlots": [
+          {"time": "08:00", "available": true, "isBooked": true},
+          {"time": "09:00", "available": true, "isBooked": true},
+          {"time": "10:00", "available": true, "isBooked": false},
+          {"time": "11:00", "available": true, "isBooked": false},
+          {"time": "14:00", "available": true, "isBooked": true},
+          {"time": "15:00", "available": true, "isBooked": false},
+          {"time": "16:00", "available": true, "isBooked": true},
+          {"time": "17:00", "available": true, "isBooked": false}
+        ]
+      },
+      {
+        "date": "2025-11-03",
+        "dayOfWeek": "周一",
+        "timeSlots": [
+          {"time": "08:00", "available": true, "isBooked": false},
+          {"time": "09:00", "available": true, "isBooked": false},
+          {"time": "10:00", "available": true, "isBooked": false},
+          {"time": "11:00", "available": true, "isBooked": false},
+          {"time": "14:00", "available": true, "isBooked": false},
+          {"time": "15:00", "available": true, "isBooked": false},
+          {"time": "16:00", "available": true, "isBooked": false},
+          {"time": "17:00", "available": true, "isBooked": false}
+        ]
+      },
+      {
+        "date": "2025-11-04",
+        "dayOfWeek": "周二",
+        "timeSlots": [
+          {"time": "08:00", "available": true, "isBooked": false},
+          {"time": "09:00", "available": true, "isBooked": false},
+          {"time": "10:00", "available": true, "isBooked": false},
+          {"time": "11:00", "available": true, "isBooked": false},
+          {"time": "14:00", "available": true, "isBooked": false},
+          {"time": "15:00", "available": true, "isBooked": false},
+          {"time": "16:00", "available": true, "isBooked": false},
+          {"time": "17:00", "available": true, "isBooked": false}
+        ]
+      }
+    ]
+  }
+]

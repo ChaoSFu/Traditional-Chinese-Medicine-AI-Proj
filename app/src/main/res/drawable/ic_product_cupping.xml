@@ -1,0 +1,78 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="120dp"
+    android:height="120dp"
+    android:viewportWidth="120"
+    android:viewportHeight="120">
+
+    <!-- 背景圆 -->
+    <path
+        android:fillColor="#FCE4EC"
+        android:pathData="M60,60m-55,0a55,55 0,1 1,110 0a55,55 0,1 1,-110 0"/>
+
+    <!-- 拔罐器主体 -->
+    <path
+        android:fillColor="#F06292"
+        android:fillAlpha="0.3"
+        android:pathData="M50,35 L70,35 Q75,35 75,40 L75,70 Q70,80 60,80 Q50,80 45,70 L45,40 Q45,35 50,35 Z"/>
+
+    <!-- 拔罐器边缘 -->
+    <path
+        android:strokeColor="#C2185B"
+        android:strokeWidth="2.5"
+        android:fillColor="@android:color/transparent"
+        android:pathData="M50,35 L70,35 Q75,35 75,40 L75,70 Q70,80 60,80 Q50,80 45,70 L45,40 Q45,35 50,35 Z"/>
+
+    <!-- 罐口 -->
+    <path
+        android:fillColor="#E91E63"
+        android:pathData="M48,78 L72,78 Q74,78 74,80 L74,82 Q74,84 72,84 L48,84 Q46,84 46,82 L46,80 Q46,78 48,78 Z"/>
+
+    <!-- 真空泵头 -->
+    <path
+        android:fillColor="#880E4F"
+        android:pathData="M56,25 L64,25 L64,35 L56,35 Z"/>
+    <path
+        android:fillColor="#AD1457"
+        android:pathData="M54,20 L66,20 Q68,20 68,22 L68,25 L52,25 L52,22 Q52,20 54,20 Z"/>
+
+    <!-- 泵头把手 -->
+    <path
+        android:fillColor="#C2185B"
+        android:pathData="M57,18 L63,18 L63,20 L57,20 Z"/>
+
+    <!-- 装饰线条 -->
+    <path
+        android:strokeColor="#F8BBD0"
+        android:strokeWidth="1.5"
+        android:pathData="M50,45 Q60,47 70,45"/>
+    <path
+        android:strokeColor="#F8BBD0"
+        android:strokeWidth="1.5"
+        android:pathData="M50,55 Q60,57 70,55"/>
+    <path
+        android:strokeColor="#F8BBD0"
+        android:strokeWidth="1.5"
+        android:pathData="M50,65 Q60,67 70,65"/>
+
+    <!-- 左侧小罐 -->
+    <path
+        android:fillColor="#F48FB1"
+        android:fillAlpha="0.4"
+        android:pathData="M25,50 L32,50 Q34,50 34,52 L34,65 Q32,70 28,70 Q24,70 22,65 L22,52 Q22,50 25,50 Z"/>
+    <path
+        android:strokeColor="#C2185B"
+        android:strokeWidth="1.5"
+        android:fillColor="@android:color/transparent"
+        android:pathData="M25,50 L32,50 Q34,50 34,52 L34,65 Q32,70 28,70 Q24,70 22,65 L22,52 Q22,50 25,50 Z"/>
+
+    <!-- 右侧小罐 -->
+    <path
+        android:fillColor="#F48FB1"
+        android:fillAlpha="0.4"
+        android:pathData="M88,50 L95,50 Q97,50 97,52 L97,65 Q95,70 91,70 Q87,70 85,65 L85,52 Q85,50 88,50 Z"/>
+    <path
+        android:strokeColor="#C2185B"
+        android:strokeWidth="1.5"
+        android:fillColor="@android:color/transparent"
+        android:pathData="M88,50 L95,50 Q97,50 97,52 L97,65 Q95,70 91,70 Q87,70 85,65 L85,52 Q85,50 88,50 Z"/>
+</vector>

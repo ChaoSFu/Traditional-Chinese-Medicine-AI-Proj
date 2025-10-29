@@ -17,6 +17,11 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
+    <!-- 通知权限 - 用于任务提醒 -->
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
+    <uses-permission android:name="android.permission.USE_EXACT_ALARM" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -27,9 +32,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TraditionalChineseMedicineAIProj">
 
-        <!-- Welcome Activity - Main Entry Point -->
+        <!-- Main Activity - Bottom Navigation (New Entry Point) -->
         <activity
-            android:name=".WelcomeActivity"
+            android:name=".MainActivity"
             android:exported="true"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -37,6 +42,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- Welcome Activity - Legacy Entry Point -->
+        <activity
+            android:name=".WelcomeActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
 
         <!-- Body Part Selection Activity -->
         <activity
@@ -52,11 +63,53 @@
             android:parentActivityName=".BodyPartSelectionActivity"
             android:screenOrientation="portrait" />
 
-        <!-- Main Detection Activity -->
+        <!-- Hand Detection Activity (原 MainActivity) -->
         <activity
-            android:name=".MainActivity"
+            android:name=".HandDetectActivity"
             android:exported="false"
-            android:parentActivityName=".AcupointSelectionActivity"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait" />
+
+        <!-- Doctor Detail Activity -->
+        <activity
+            android:name=".DoctorDetailActivity"
+            android:exported="false"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait" />
+
+        <!-- Doctor Schedule Activity -->
+        <activity
+            android:name=".DoctorScheduleActivity"
+            android:exported="false"
+            android:parentActivityName=".DoctorDetailActivity"
+            android:screenOrientation="portrait" />
+
+        <!-- Report Activity -->
+        <activity
+            android:name=".ReportActivity"
+            android:exported="false"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait" />
+
+        <!-- Medical Records Activity -->
+        <activity
+            android:name=".MedicalRecordsActivity"
+            android:exported="false"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait" />
+
+        <!-- Lecture List Activity -->
+        <activity
+            android:name=".LectureListActivity"
+            android:exported="false"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait" />
+
+        <!-- Department Detail Activity -->
+        <activity
+            android:name=".DepartmentDetailActivity"
+            android:exported="false"
+            android:parentActivityName=".MainActivity"
             android:screenOrientation="portrait" />
 
         <!-- Chat Activity - AI Q&A -->
@@ -74,6 +127,12 @@
             android:parentActivityName=".ChatActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize" />
+
+        <!-- Task Reminder Receiver -->
+        <receiver
+            android:name=".utils.TaskReminderReceiver"
+            android:enabled="true"
+            android:exported="false" />
     </application>
 
 </manifest>

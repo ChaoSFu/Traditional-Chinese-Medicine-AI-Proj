@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    app:cardElevation="4dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- 标题和类型 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:id="@+id/tvType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="[讲座]"
+                android:textSize="12sp"
+                android:textColor="@color/tcm_primary"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="8dp"
+                android:text="秋冬养生之道"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="即将开始"
+                android:textSize="12sp"
+                android:textColor="@android:color/holo_green_dark" />
+        </LinearLayout>
+
+        <!-- 主讲人 -->
+        <TextView
+            android:id="@+id/tvSpeaker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="陈芳 主任医师"
+            android:textSize="14sp" />
+
+        <!-- 时间地点 -->
+        <TextView
+            android:id="@+id/tvDateTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="2025-11-05 14:00-16:00"
+            android:textSize="12sp"
+            android:textColor="@android:color/darker_gray" />
+
+        <TextView
+            android:id="@+id/tvLocation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="中医诊所多功能厅"
+            android:textSize="12sp"
+            android:textColor="@android:color/darker_gray" />
+
+        <!-- 主题 -->
+        <TextView
+            android:id="@+id/tvTopics"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="主题：秋冬养生理论、食疗方案"
+            android:textSize="12sp" />
+
+        <!-- 名额信息 -->
+        <TextView
+            android:id="@+id/tvCapacity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="名额：32/50"
+            android:textSize="12sp"
+            android:textColor="@android:color/holo_orange_dark" />
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

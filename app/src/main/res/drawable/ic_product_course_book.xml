@@ -1,0 +1,98 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="120dp"
+    android:height="120dp"
+    android:viewportWidth="120"
+    android:viewportHeight="120">
+
+    <!-- 背景圆 -->
+    <path
+        android:fillColor="#FFF8E1"
+        android:pathData="M60,60m-55,0a55,55 0,1 1,110 0a55,55 0,1 1,-110 0"/>
+
+    <!-- 古籍封面 -->
+    <path
+        android:fillColor="#8D6E63"
+        android:pathData="M35,25 L85,25 L85,90 L35,90 Z"/>
+
+    <!-- 封面装饰边框 -->
+    <path
+        android:fillColor="#A1887F"
+        android:pathData="M38,28 L82,28 L82,87 L38,87 Z"/>
+
+    <!-- 内页 -->
+    <path
+        android:fillColor="#FFECB3"
+        android:pathData="M40,30 L80,30 L80,85 L40,85 Z"/>
+
+    <!-- 书名框 -->
+    <path
+        android:strokeColor="#5D4037"
+        android:strokeWidth="2"
+        android:fillColor="@android:color/transparent"
+        android:pathData="M45,38 L75,38 L75,55 L45,55 Z"/>
+
+    <!-- 书名装饰 - 简化的"黄帝内经"字样装饰 -->
+    <path
+        android:fillColor="#5D4037"
+        android:pathData="M50,42 L52,42 L52,51 L50,51 Z"/>
+    <path
+        android:fillColor="#5D4037"
+        android:pathData="M48,44 L54,44 L54,46 L48,46 Z"/>
+
+    <path
+        android:fillColor="#5D4037"
+        android:pathData="M57,42 L59,42 L59,51 L57,51 Z"/>
+    <path
+        android:fillColor="#5D4037"
+        android:pathData="M55,46 L61,46 L61,48 L55,48 Z"/>
+
+    <path
+        android:fillColor="#5D4037"
+        android:pathData="M64,42 L66,42 L66,51 L64,51 Z"/>
+    <path
+        android:fillColor="#5D4037"
+        android:pathData="M62,48 L68,48 L68,50 L62,50 Z"/>
+
+    <path
+        android:fillColor="#5D4037"
+        android:pathData="M70,42 L72,42 L72,51 L70,51 Z"/>
+    <path
+        android:fillColor="#5D4037"
+        android:pathData="M69,42 L73,42 L73,44 L69,44 Z"/>
+
+    <!-- 内容文字线条 -->
+    <path
+        android:strokeColor="#8D6E63"
+        android:strokeWidth="1.5"
+        android:pathData="M45,60 L75,60"/>
+    <path
+        android:strokeColor="#8D6E63"
+        android:strokeWidth="1.5"
+        android:pathData="M45,65 L75,65"/>
+    <path
+        android:strokeColor="#8D6E63"
+        android:strokeWidth="1.5"
+        android:pathData="M45,70 L75,70"/>
+    <path
+        android:strokeColor="#8D6E63"
+        android:strokeWidth="1.5"
+        android:pathData="M45,75 L75,75"/>
+    <path
+        android:strokeColor="#8D6E63"
+        android:strokeWidth="1.5"
+        android:pathData="M45,80 L65,80"/>
+
+    <!-- 书脊 -->
+    <path
+        android:fillColor="#6D4C41"
+        android:pathData="M32,25 L35,25 L35,90 L32,90 Z"/>
+
+    <!-- 播放按钮装饰（表示视频课程） -->
+    <path
+        android:fillColor="#FF6F00"
+        android:fillAlpha="0.9"
+        android:pathData="M25,50 L25,65 L38,57.5 Z"/>
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M28,54 L28,61 L34,57.5 Z"/>
+</vector>

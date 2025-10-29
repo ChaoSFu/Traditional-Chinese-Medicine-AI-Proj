@@ -1,0 +1,167 @@
+[
+  {
+    "id": 1,
+    "name": "艾灸贴（10片装）",
+    "category": "gift",
+    "points": 50,
+    "description": "采用优质陈艾，温经散寒，适用于颈肩腰腿痛。每片可持续发热8-12小时。",
+    "imageUrl": "",
+    "stock": 100,
+    "redeemed": 23,
+    "tags": ["热销", "养生"]
+  },
+  {
+    "id": 2,
+    "name": "养生红枣枸杞茶",
+    "category": "gift",
+    "points": 80,
+    "description": "精选宁夏枸杞、新疆红枣，补气养血，增强免疫力。500g独立包装。",
+    "imageUrl": "",
+    "stock": 80,
+    "redeemed": 45,
+    "tags": ["热销", "养生茶"]
+  },
+  {
+    "id": 3,
+    "name": "经络刮痧板（牛角）",
+    "category": "gift",
+    "points": 120,
+    "description": "天然水牛角制作，手工打磨，可用于面部美容、全身刮痧，促进血液循环。",
+    "imageUrl": "",
+    "stock": 50,
+    "redeemed": 12,
+    "tags": ["精品", "刮痧"]
+  },
+  {
+    "id": 4,
+    "name": "足浴养生药包（10包）",
+    "category": "gift",
+    "points": 100,
+    "description": "含艾叶、生姜、红花等中药材，祛湿散寒，改善睡眠，缓解疲劳。",
+    "imageUrl": "",
+    "stock": 120,
+    "redeemed": 67,
+    "tags": ["热销", "足浴"]
+  },
+  {
+    "id": 5,
+    "name": "艾灸盒随身灸",
+    "category": "gift",
+    "points": 150,
+    "description": "便携式艾灸盒，可固定在身体各部位，温和灸疗，安全方便。附赠10支艾条。",
+    "imageUrl": "",
+    "stock": 60,
+    "redeemed": 28,
+    "tags": ["精品", "艾灸"]
+  },
+  {
+    "id": 6,
+    "name": "陈皮普洱茶饼",
+    "category": "gift",
+    "points": 200,
+    "description": "10年陈皮配5年普洱，理气健脾，降脂消食。357g茶饼装。",
+    "imageUrl": "",
+    "stock": 40,
+    "redeemed": 15,
+    "tags": ["精品", "养生茶"]
+  },
+  {
+    "id": 7,
+    "name": "拔罐器（12罐套装）",
+    "category": "gift",
+    "points": 180,
+    "description": "真空拔罐器，不同尺寸罐体，适用于全身各部位，祛湿排毒，缓解疼痛。",
+    "imageUrl": "",
+    "stock": 45,
+    "redeemed": 19,
+    "tags": ["拔罐", "养生"]
+  },
+  {
+    "id": 8,
+    "name": "五行养生香囊",
+    "category": "gift",
+    "points": 60,
+    "description": "采用藿香、薄荷、丁香等中药材，芳香避秽，提神醒脑，可挂车内、卧室。",
+    "imageUrl": "",
+    "stock": 150,
+    "redeemed": 82,
+    "tags": ["热销", "香囊"]
+  },
+  {
+    "id": 9,
+    "name": "《黄帝内经》养生课程",
+    "category": "course",
+    "points": 300,
+    "description": "10节精品视频课程，深入浅出讲解《黄帝内经》养生智慧，涵盖四季养生、情志调理、饮食宜忌等内容。",
+    "imageUrl": "",
+    "stock": 200,
+    "redeemed": 56,
+    "tags": ["热门课程", "养生"]
+  },
+  {
+    "id": 10,
+    "name": "小儿推拿入门课",
+    "category": "course",
+    "points": 250,
+    "description": "8节实操课程，教授常见小儿疾病的推拿手法，包括感冒、发烧、积食、腹泻等的家庭护理。",
+    "imageUrl": "",
+    "stock": 150,
+    "redeemed": 43,
+    "tags": ["热门课程", "推拿"]
+  },
+  {
+    "id": 11,
+    "name": "经络穴位认知课",
+    "category": "course",
+    "points": 200,
+    "description": "6节课程，系统学习人体常用穴位的定位和功效，配合真人演示，轻松掌握穴位按摩技巧。",
+    "imageUrl": "",
+    "stock": 180,
+    "redeemed": 71,
+    "tags": ["热门课程", "穴位"]
+  },
+  {
+    "id": 12,
+    "name": "四季养生茶饮课",
+    "category": "course",
+    "points": 150,
+    "description": "4节课程，教你根据不同季节、体质选择合适的养生茶饮，提供多款茶饮配方。",
+    "imageUrl": "",
+    "stock": 220,
+    "redeemed": 89,
+    "tags": ["养生茶", "课程"]
+  },
+  {
+    "id": 13,
+    "name": "艾灸养生实操课",
+    "category": "course",
+    "points": 280,
+    "description": "8节课程，从艾灸基础知识到实际操作，教授常见病症的艾灸疗法和注意事项。",
+    "imageUrl": "",
+    "stock": 160,
+    "redeemed": 37,
+    "tags": ["艾灸", "课程"]
+  },
+  {
+    "id": 14,
+    "name": "中医体质辨识课",
+    "category": "course",
+    "points": 180,
+    "description": "5节课程，学习九种体质的特征识别和调理方法，找到适合自己的养生之道。",
+    "imageUrl": "",
+    "stock": 190,
+    "redeemed": 52,
+    "tags": ["体质", "课程"]
+  },
+  {
+    "id": 15,
+    "name": "桑叶茶（100g装）",
+    "category": "gift",
+    "points": 70,
+    "description": "霜降后采摘的桑叶，清肝明目，降血糖血脂，适合三高人群日常饮用。",
+    "imageUrl": "",
+    "stock": 90,
+    "redeemed": 34,
+    "tags": ["养生茶", "三高"]
+  }
+]

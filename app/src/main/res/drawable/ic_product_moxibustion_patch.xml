@@ -1,0 +1,53 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="120dp"
+    android:height="120dp"
+    android:viewportWidth="120"
+    android:viewportHeight="120">
+
+    <!-- 背景圆 -->
+    <path
+        android:fillColor="#FFF3E0"
+        android:pathData="M60,60m-55,0a55,55 0,1 1,110 0a55,55 0,1 1,-110 0"/>
+
+    <!-- 贴片外框 -->
+    <path
+        android:fillColor="#FFE0B2"
+        android:pathData="M35,35 L85,35 L85,85 L35,85 Z"
+        android:strokeColor="#FF8A65"
+        android:strokeWidth="2"/>
+
+    <!-- 贴片内层 -->
+    <path
+        android:fillColor="#FFCCBC"
+        android:pathData="M40,40 L80,40 L80,80 L40,80 Z"/>
+
+    <!-- 艾绒纹理 -->
+    <path
+        android:fillColor="#FF6F00"
+        android:pathData="M45,50 Q52,48 60,50 T75,50"
+        android:strokeWidth="1.5"
+        android:strokeColor="#FF6F00"/>
+    <path
+        android:fillColor="#FF8F00"
+        android:pathData="M45,57 Q52,55 60,57 T75,57"
+        android:strokeWidth="1.5"
+        android:strokeColor="#FF8F00"/>
+    <path
+        android:fillColor="#FFA726"
+        android:pathData="M45,64 Q52,62 60,64 T75,64"
+        android:strokeWidth="1.5"
+        android:strokeColor="#FFA726"/>
+    <path
+        android:fillColor="#FFB74D"
+        android:pathData="M45,71 Q52,69 60,71 T75,71"
+        android:strokeWidth="1.5"
+        android:strokeColor="#FFB74D"/>
+
+    <!-- 发热标记 -->
+    <path
+        android:fillColor="#D84315"
+        android:pathData="M55,45 L57,42 L59,45 L57,43 Z"/>
+    <path
+        android:fillColor="#D84315"
+        android:pathData="M63,45 L65,42 L67,45 L65,43 Z"/>
+</vector>

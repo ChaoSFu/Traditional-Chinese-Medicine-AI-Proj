@@ -1,0 +1,18 @@
+{
+  "id": 1,
+  "name": "用户001",
+  "avatar": "",
+  "phone": "138****1234",
+  "gender": "女",
+  "age": 28,
+  "constitution": "气虚质",
+  "points": 350,
+  "level": "银牌会员",
+  "registeredDate": "2025-08-15",
+  "bio": "追求健康生活，相信中医调理的力量",
+  "health_goals": [
+    "改善睡眠质量",
+    "调理气血",
+    "增强体质"
+  ]
+}

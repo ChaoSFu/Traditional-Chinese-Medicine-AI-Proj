@@ -1,0 +1,79 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="120dp"
+    android:height="120dp"
+    android:viewportWidth="120"
+    android:viewportHeight="120">
+
+    <!-- 背景圆 -->
+    <path
+        android:fillColor="#FBE9E7"
+        android:pathData="M60,60m-55,0a55,55 0,1 1,110 0a55,55 0,1 1,-110 0"/>
+
+    <!-- 人体轮廓 -->
+    <path
+        android:fillColor="#FFCCBC"
+        android:pathData="M60,25 m-6,0 a6,6 0,1 1,12 0 a6,6 0,1 1,-12 0"/>
+    <path
+        android:fillColor="#FFAB91"
+        android:pathData="M55,32 L65,32 L68,50 L68,75 L63,75 L63,90 L57,90 L57,75 L52,75 L52,50 Z"/>
+    <path
+        android:fillColor="#FFAB91"
+        android:pathData="M52,35 L45,45 L48,47 L55,40 Z"/>
+    <path
+        android:fillColor="#FFAB91"
+        android:pathData="M68,35 L75,45 L72,47 L65,40 Z"/>
+
+    <!-- 经络线条 -->
+    <path
+        android:strokeColor="#D84315"
+        android:strokeWidth="1.5"
+        android:fillColor="@android:color/transparent"
+        android:pathData="M60,31 L60,75"/>
+    <path
+        android:strokeColor="#FF5722"
+        android:strokeWidth="1.2"
+        android:fillColor="@android:color/transparent"
+        android:pathData="M56,35 L56,70"/>
+    <path
+        android:strokeColor="#FF5722"
+        android:strokeWidth="1.2"
+        android:fillColor="@android:color/transparent"
+        android:pathData="M64,35 L64,70"/>
+
+    <!-- 穴位点 -->
+    <path
+        android:fillColor="#FF3D00"
+        android:pathData="M60,40 m-2.5,0 a2.5,2.5 0,1 1,5 0 a2.5,2.5 0,1 1,-5 0"/>
+    <path
+        android:fillColor="#FF3D00"
+        android:pathData="M60,50 m-2.5,0 a2.5,2.5 0,1 1,5 0 a2.5,2.5 0,1 1,-5 0"/>
+    <path
+        android:fillColor="#FF3D00"
+        android:pathData="M60,60 m-2.5,0 a2.5,2.5 0,1 1,5 0 a2.5,2.5 0,1 1,-5 0"/>
+    <path
+        android:fillColor="#FF3D00"
+        android:pathData="M60,70 m-2.5,0 a2.5,2.5 0,1 1,5 0 a2.5,2.5 0,1 1,-5 0"/>
+
+    <!-- 能量波纹效果 -->
+    <path
+        android:strokeColor="#FF6E40"
+        android:strokeWidth="1.5"
+        android:fillColor="@android:color/transparent"
+        android:strokeAlpha="0.6"
+        android:pathData="M60,50 m-8,0 a8,8 0,1 1,16 0 a8,8 0,1 1,-16 0"/>
+    <path
+        android:strokeColor="#FF6E40"
+        android:strokeWidth="1"
+        android:fillColor="@android:color/transparent"
+        android:strokeAlpha="0.3"
+        android:pathData="M60,50 m-12,0 a12,12 0,1 1,24 0 a12,12 0,1 1,-24 0"/>
+
+    <!-- 播放按钮装饰（表示课程） -->
+    <path
+        android:fillColor="#4CAF50"
+        android:fillAlpha="0.9"
+        android:pathData="M80,70 m-10,0 a10,10 0,1 1,20 0 a10,10 0,1 1,-20 0"/>
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M85,65 L85,75 L93,70 Z"/>
+</vector>

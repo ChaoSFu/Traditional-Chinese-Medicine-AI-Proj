@@ -1,0 +1,79 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="120dp"
+    android:height="120dp"
+    android:viewportWidth="120"
+    android:viewportHeight="120">
+
+    <!-- 背景圆 -->
+    <path
+        android:fillColor="#F3E5F5"
+        android:pathData="M60,60m-55,0a55,55 0,1 1,110 0a55,55 0,1 1,-110 0"/>
+
+    <!-- 手掌 -->
+    <path
+        android:fillColor="#FFCC80"
+        android:pathData="M45,45 Q42,45 42,48 L42,75 Q42,78 45,78 L70,78 Q73,78 73,75 L73,48 Q73,45 70,45 Z"/>
+
+    <!-- 手指 -->
+    <path
+        android:fillColor="#FFB74D"
+        android:pathData="M45,35 Q43,35 43,37 L43,48 L48,48 L48,37 Q48,35 45,35 Z"/>
+    <path
+        android:fillColor="#FFB74D"
+        android:pathData="M52,30 Q50,30 50,32 L50,48 L55,48 L55,32 Q55,30 52,30 Z"/>
+    <path
+        android:fillColor="#FFB74D"
+        android:pathData="M59,28 Q57,28 57,30 L57,48 L62,48 L62,30 Q62,28 59,28 Z"/>
+    <path
+        android:fillColor="#FFB74D"
+        android:pathData="M66,32 Q64,32 64,34 L64,48 L69,48 L69,34 Q69,32 66,32 Z"/>
+
+    <!-- 拇指 -->
+    <path
+        android:fillColor="#FFB74D"
+        android:pathData="M39,55 Q37,55 37,57 L37,65 Q37,67 39,67 L43,67 L43,55 Z"/>
+
+    <!-- 手掌纹理 -->
+    <path
+        android:strokeColor="#FF9800"
+        android:strokeWidth="1.5"
+        android:pathData="M45,55 Q55,58 65,55"/>
+    <path
+        android:strokeColor="#FF9800"
+        android:strokeWidth="1.5"
+        android:pathData="M45,62 Q55,65 70,62"/>
+    <path
+        android:strokeColor="#FF9800"
+        android:strokeWidth="1.5"
+        android:pathData="M45,70 Q55,72 70,70"/>
+
+    <!-- 婴儿轮廓 -->
+    <path
+        android:fillColor="#81D4FA"
+        android:fillAlpha="0.6"
+        android:pathData="M75,50 m-8,0 a8,8 0,1 1,16 0 a8,8 0,1 1,-16 0"/>
+    <path
+        android:fillColor="#64B5F6"
+        android:fillAlpha="0.6"
+        android:pathData="M70,60 L80,60 Q82,60 82,62 L82,78 Q82,80 80,80 L70,80 Q68,80 68,78 L68,62 Q68,60 70,60 Z"/>
+
+    <!-- 按摩动作线条 -->
+    <path
+        android:strokeColor="#9C27B0"
+        android:strokeWidth="2"
+        android:strokeLineCap="round"
+        android:fillColor="@android:color/transparent"
+        android:pathData="M55,50 Q52,48 50,45"/>
+    <path
+        android:strokeColor="#BA68C8"
+        android:strokeWidth="2"
+        android:strokeLineCap="round"
+        android:fillColor="@android:color/transparent"
+        android:pathData="M60,52 Q58,50 56,47"/>
+    <path
+        android:strokeColor="#CE93D8"
+        android:strokeWidth="2"
+        android:strokeLineCap="round"
+        android:fillColor="@android:color/transparent"
+        android:pathData="M65,54 Q63,52 61,49"/>
+</vector>

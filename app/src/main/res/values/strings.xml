@@ -60,4 +60,14 @@
     <string name="settings_reset">已恢复默认设置</string>
     <string name="model_gpt35">GPT-3.5 Turbo（推荐）</string>
     <string name="model_gpt4">GPT-4（更智能）</string>
+
+    <!-- 底部导航 -->
+    <string name="nav_home">首页</string>
+    <string name="nav_task">任务</string>
+    <string name="nav_doctor">医师</string>
+    <string name="nav_appointment">挂号</string>
+    <string name="nav_store">商城</string>
+    <string name="nav_record">记录</string>
+    <string name="nav_ai">AI助手</string>
+    <string name="nav_profile">我的</string>
 </resources>

@@ -1,0 +1,121 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="120dp"
+    android:height="120dp"
+    android:viewportWidth="120"
+    android:viewportHeight="120">
+
+    <!-- 背景圆 -->
+    <path
+        android:fillColor="#E8EAF6"
+        android:pathData="M60,60m-55,0a55,55 0,1 1,110 0a55,55 0,1 1,-110 0"/>
+
+    <!-- 中心人体图标 -->
+    <path
+        android:fillColor="#5C6BC0"
+        android:pathData="M60,35 m-8,0 a8,8 0,1 1,16 0 a8,8 0,1 1,-16 0"/>
+    <path
+        android:fillColor="#5C6BC0"
+        android:pathData="M53,44 L67,44 L70,60 L70,80 L64,80 L64,90 L56,90 L56,80 L50,80 L50,60 Z"/>
+
+    <!-- 九种体质环绕圆点 -->
+    <!-- 平和质 -->
+    <path
+        android:fillColor="#4CAF50"
+        android:pathData="M60,15 m-4,0 a4,4 0,1 1,8 0 a4,4 0,1 1,-8 0"/>
+
+    <!-- 气虚质 -->
+    <path
+        android:fillColor="#FFC107"
+        android:pathData="M85,25 m-4,0 a4,4 0,1 1,8 0 a4,4 0,1 1,-8 0"/>
+
+    <!-- 阳虚质 -->
+    <path
+        android:fillColor="#FF9800"
+        android:pathData="M95,50 m-4,0 a4,4 0,1 1,8 0 a4,4 0,1 1,-8 0"/>
+
+    <!-- 阴虚质 -->
+    <path
+        android:fillColor="#F44336"
+        android:pathData="M90,75 m-4,0 a4,4 0,1 1,8 0 a4,4 0,1 1,-8 0"/>
+
+    <!-- 痰湿质 -->
+    <path
+        android:fillColor="#795548"
+        android:pathData="M70,92 m-4,0 a4,4 0,1 1,8 0 a4,4 0,1 1,-8 0"/>
+
+    <!-- 湿热质 -->
+    <path
+        android:fillColor="#E91E63"
+        android:pathData="M45,92 m-4,0 a4,4 0,1 1,8 0 a4,4 0,1 1,-8 0"/>
+
+    <!-- 血瘀质 -->
+    <path
+        android:fillColor="#9C27B0"
+        android:pathData="M25,75 m-4,0 a4,4 0,1 1,8 0 a4,4 0,1 1,-8 0"/>
+
+    <!-- 气郁质 -->
+    <path
+        android:fillColor="#3F51B5"
+        android:pathData="M20,50 m-4,0 a4,4 0,1 1,8 0 a4,4 0,1 1,-8 0"/>
+
+    <!-- 特禀质 -->
+    <path
+        android:fillColor="#00BCD4"
+        android:pathData="M30,25 m-4,0 a4,4 0,1 1,8 0 a4,4 0,1 1,-8 0"/>
+
+    <!-- 连接线 -->
+    <path
+        android:strokeColor="#9FA8DA"
+        android:strokeWidth="1.5"
+        android:strokeAlpha="0.4"
+        android:fillColor="@android:color/transparent"
+        android:pathData="M60,60 L60,19"/>
+    <path
+        android:strokeColor="#9FA8DA"
+        android:strokeWidth="1.5"
+        android:strokeAlpha="0.4"
+        android:fillColor="@android:color/transparent"
+        android:pathData="M60,60 L81,29"/>
+    <path
+        android:strokeColor="#9FA8DA"
+        android:strokeWidth="1.5"
+        android:strokeAlpha="0.4"
+        android:fillColor="@android:color/transparent"
+        android:pathData="M60,60 L91,50"/>
+    <path
+        android:strokeColor="#9FA8DA"
+        android:strokeWidth="1.5"
+        android:strokeAlpha="0.4"
+        android:fillColor="@android:color/transparent"
+        android:pathData="M60,60 L86,71"/>
+    <path
+        android:strokeColor="#9FA8DA"
+        android:strokeWidth="1.5"
+        android:strokeAlpha="0.4"
+        android:fillColor="@android:color/transparent"
+        android:pathData="M60,60 L70,88"/>
+    <path
+        android:strokeColor="#9FA8DA"
+        android:strokeWidth="1.5"
+        android:strokeAlpha="0.4"
+        android:fillColor="@android:color/transparent"
+        android:pathData="M60,60 L45,88"/>
+    <path
+        android:strokeColor="#9FA8DA"
+        android:strokeWidth="1.5"
+        android:strokeAlpha="0.4"
+        android:fillColor="@android:color/transparent"
+        android:pathData="M60,60 L29,71"/>
+    <path
+        android:strokeColor="#9FA8DA"
+        android:strokeWidth="1.5"
+        android:strokeAlpha="0.4"
+        android:fillColor="@android:color/transparent"
+        android:pathData="M60,60 L24,50"/>
+    <path
+        android:strokeColor="#9FA8DA"
+        android:strokeWidth="1.5"
+        android:strokeAlpha="0.4"
+        android:fillColor="@android:color/transparent"
+        android:pathData="M60,60 L34,29"/>
+</vector>

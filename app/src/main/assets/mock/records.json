@@ -1,0 +1,58 @@
+[
+  {
+    "id": 1,
+    "date": "2025-10-10",
+    "doctor": "张静",
+    "doctorId": 1,
+    "dept": "针灸科",
+    "diagnosis": "颈椎病（神经根型）",
+    "symptoms": "颈部酸痛，右上肢麻木，伴头晕",
+    "treatment": "针灸配合艾灸，推拿理疗",
+    "prescription": "颈复康颗粒 3次/日，活血止痛胶囊 2次/日",
+    "progress": "进行中",
+    "nextVisit": "2025-11-01",
+    "notes": "建议配合热敷，避免长时间低头。注意颈部保暖。"
+  },
+  {
+    "id": 2,
+    "date": "2025-09-15",
+    "doctor": "李慧",
+    "doctorId": 2,
+    "dept": "妇科",
+    "diagnosis": "气血亏虚",
+    "symptoms": "月经量少，面色苍白，乏力",
+    "treatment": "四物汤加减调理",
+    "prescription": "四物汤颗粒 2次/日，阿胶补血口服液",
+    "progress": "已完成",
+    "nextVisit": "",
+    "notes": "服药2个月后复查，注意营养均衡。"
+  },
+  {
+    "id": 3,
+    "date": "2025-09-20",
+    "doctor": "王明",
+    "doctorId": 3,
+    "dept": "推拿科",
+    "diagnosis": "腰肌劳损",
+    "symptoms": "腰部酸痛，久坐加重",
+    "treatment": "推拿按摩，热敷",
+    "prescription": "腰痛宁胶囊 3次/日",
+    "progress": "已完成",
+    "nextVisit": "",
+    "notes": "加强腰部肌肉锻炼，避免久坐。"
+  },
+  {
+    "id": 4,
+    "date": "2025-10-20",
+    "doctor": "陈芳",
+    "doctorId": 4,
+    "dept": "内科",
+    "diagnosis": "脾胃虚弱",
+    "symptoms": "食欲不振，腹胀，大便溏稀",
+    "treatment": "健脾和胃，调理气机",
+    "prescription": "香砂养胃丸 3次/日，参苓白术散",
+    "progress": "进行中",
+    "nextVisit": "2025-11-05",
+    "notes": "饮食清淡，少食生冷。规律作息。"
+  }
+]

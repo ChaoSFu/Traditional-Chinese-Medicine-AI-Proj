@@ -1,0 +1,101 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="120dp"
+    android:height="120dp"
+    android:viewportWidth="120"
+    android:viewportHeight="120">
+
+    <!-- 背景圆 -->
+    <path
+        android:fillColor="#FFF9C4"
+        android:pathData="M60,60m-55,0a55,55 0,1 1,110 0a55,55 0,1 1,-110 0"/>
+
+    <!-- 挂绳 -->
+    <path
+        android:strokeColor="#8D6E63"
+        android:strokeWidth="2"
+        android:pathData="M60,22 L60,35"/>
+
+    <!-- 绳扣 -->
+    <path
+        android:fillColor="#6D4C41"
+        android:pathData="M57,20 L63,20 Q64,20 64,21 L64,24 Q64,25 63,25 L57,25 Q56,25 56,24 L56,21 Q56,20 57,20 Z"/>
+
+    <!-- 香囊主体 -->
+    <path
+        android:fillColor="#F57C00"
+        android:pathData="M45,35 L75,35 L75,70 Q75,80 60,80 Q45,80 45,70 Z"/>
+
+    <!-- 香囊装饰边框 -->
+    <path
+        android:fillColor="#FF9800"
+        android:pathData="M47,37 L73,37 L73,68 Q73,77 60,77 Q47,77 47,68 Z"/>
+
+    <!-- 刺绣装饰 - 花纹 -->
+    <path
+        android:fillColor="#FFD54F"
+        android:pathData="M60,50 m-6,0 a6,6 0,1 1,12 0 a6,6 0,1 1,-12 0"/>
+
+    <!-- 花瓣 -->
+    <path
+        android:fillColor="#FFF59D"
+        android:pathData="M60,44 Q62,46 60,48 Q58,46 60,44 Z"/>
+    <path
+        android:fillColor="#FFF59D"
+        android:pathData="M66,50 Q64,52 62,50 Q64,48 66,50 Z"/>
+    <path
+        android:fillColor="#FFF59D"
+        android:pathData="M60,56 Q58,54 60,52 Q62,54 60,56 Z"/>
+    <path
+        android:fillColor="#FFF59D"
+        android:pathData="M54,50 Q56,48 58,50 Q56,52 54,50 Z"/>
+
+    <!-- 装饰线条 -->
+    <path
+        android:strokeColor="#E65100"
+        android:strokeWidth="1.5"
+        android:pathData="M50,42 L70,42"/>
+    <path
+        android:strokeColor="#E65100"
+        android:strokeWidth="1.5"
+        android:pathData="M50,60 L70,60"/>
+
+    <!-- 中国结装饰 -->
+    <path
+        android:fillColor="#D84315"
+        android:pathData="M58,65 L62,65 L62,70 L58,70 Z"/>
+    <path
+        android:fillColor="#BF360C"
+        android:pathData="M57,68 L63,68 L62,72 L58,72 Z"/>
+
+    <!-- 流苏 -->
+    <path
+        android:strokeColor="#FF6F00"
+        android:strokeWidth="1"
+        android:pathData="M55,72 L53,78"/>
+    <path
+        android:strokeColor="#FF6F00"
+        android:strokeWidth="1"
+        android:pathData="M57,72 L56,78"/>
+    <path
+        android:strokeColor="#FF6F00"
+        android:strokeWidth="1"
+        android:pathData="M60,72 L60,79"/>
+    <path
+        android:strokeColor="#FF6F00"
+        android:strokeWidth="1"
+        android:pathData="M63,72 L64,78"/>
+    <path
+        android:strokeColor="#FF6F00"
+        android:strokeWidth="1"
+        android:pathData="M65,72 L67,78"/>
+
+    <!-- 草药示意 -->
+    <path
+        android:fillColor="#8BC34A"
+        android:fillAlpha="0.3"
+        android:pathData="M52,52 Q50,50 52,48 Q54,50 52,52 Z"/>
+    <path
+        android:fillColor="#7CB342"
+        android:fillAlpha="0.3"
+        android:pathData="M68,52 Q66,50 68,48 Q70,50 68,52 Z"/>
+</vector>

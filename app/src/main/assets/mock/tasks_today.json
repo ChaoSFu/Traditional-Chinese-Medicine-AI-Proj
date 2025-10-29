@@ -1,0 +1,61 @@
+{
+  "date": "2025-10-27",
+  "tasks": [
+    {
+      "id": 1,
+      "type": "medicine",
+      "title": "服用颈复康颗粒",
+      "time": "08:00",
+      "completed": false,
+      "points": 10,
+      "description": "早餐后服用，温水送服"
+    },
+    {
+      "id": 2,
+      "type": "medicine",
+      "title": "服用颈复康颗粒",
+      "time": "12:00",
+      "completed": false,
+      "points": 10,
+      "description": "午餐后服用"
+    },
+    {
+      "id": 3,
+      "type": "massage",
+      "title": "按摩合谷穴（LI4）",
+      "time": "12:30",
+      "duration": "10分钟",
+      "completed": false,
+      "points": 15,
+      "description": "双手交替按摩，每侧5分钟"
+    },
+    {
+      "id": 4,
+      "type": "appointment",
+      "title": "14:00 张静医师针灸复诊",
+      "time": "14:00",
+      "completed": false,
+      "points": 0,
+      "description": "针灸科诊室3，携带就诊卡"
+    },
+    {
+      "id": 5,
+      "type": "medicine",
+      "title": "服用颈复康颗粒",
+      "time": "18:00",
+      "completed": false,
+      "points": 10,
+      "description": "晚餐后服用"
+    },
+    {
+      "id": 6,
+      "type": "exercise",
+      "title": "颈部保健操",
+      "time": "20:00",
+      "duration": "15分钟",
+      "completed": false,
+      "points": 20,
+      "description": "参考医师指导视频进行练习"
+    }
+  ]
+}
