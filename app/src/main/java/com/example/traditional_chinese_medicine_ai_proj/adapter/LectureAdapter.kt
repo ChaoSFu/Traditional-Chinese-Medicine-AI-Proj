@@ -3,8 +3,11 @@ package com.example.traditional_chinese_medicine_ai_proj.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.traditional_chinese_medicine_ai_proj.R
 import com.example.traditional_chinese_medicine_ai_proj.data.Lecture
 
@@ -14,14 +17,12 @@ class LectureAdapter(
 ) : RecyclerView.Adapter<LectureAdapter.LectureViewHolder>() {
 
     inner class LectureViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val tvTitle: TextView = view.findViewById(R.id.tvTitle)
-        val tvType: TextView = view.findViewById(R.id.tvType)
-        val tvSpeaker: TextView = view.findViewById(R.id.tvSpeaker)
-        val tvDateTime: TextView = view.findViewById(R.id.tvDateTime)
-        val tvLocation: TextView = view.findViewById(R.id.tvLocation)
-        val tvCapacity: TextView = view.findViewById(R.id.tvCapacity)
-        val tvStatus: TextView = view.findViewById(R.id.tvStatus)
-        val tvTopics: TextView = view.findViewById(R.id.tvTopics)
+        val ivLectureCover: ImageView = view.findViewById(R.id.ivLectureCover)
+        val tvLectureTitle: TextView = view.findViewById(R.id.tvLectureTitle)
+        val tvLectureSpeaker: TextView = view.findViewById(R.id.tvLectureSpeaker)
+        val tvLectureStatus: TextView = view.findViewById(R.id.tvLectureStatus)
+        val tvLectureDateTime: TextView = view.findViewById(R.id.tvLectureDateTime)
+        val tvParticipants: TextView = view.findViewById(R.id.tvParticipants)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LectureViewHolder {
@@ -33,33 +34,46 @@ class LectureAdapter(
     override fun onBindViewHolder(holder: LectureViewHolder, position: Int) {
         val lecture = lectures[position]
 
-        holder.tvTitle.text = lecture.title
-        holder.tvType.text = getTypeText(lecture.type)
-        holder.tvSpeaker.text = "${lecture.speaker} ${lecture.speakerTitle}"
-        holder.tvDateTime.text = "${lecture.date} ${lecture.time}"
-        holder.tvLocation.text = lecture.location
-
-        // 显示容量信息
-        if (lecture.requiresRegistration) {
-            holder.tvCapacity.text = "名额：${lecture.registered}/${lecture.capacity}"
-            holder.tvCapacity.visibility = View.VISIBLE
+        // 加载封面图片
+        if (lecture.imageUrl.isNotEmpty()) {
+            Glide.with(holder.itemView.context)
+                .load(lecture.imageUrl)
+                .transition(DrawableTransitionOptions.withCrossFade())
+                .placeholder(R.drawable.bg_points_card)
+                .error(R.drawable.bg_points_card)
+                .into(holder.ivLectureCover)
         } else {
-            holder.tvCapacity.visibility = View.GONE
+            holder.ivLectureCover.setImageResource(R.drawable.bg_points_card)
         }
 
-        // 设置状态
-        holder.tvStatus.text = getStatusText(lecture.status)
-        holder.tvStatus.setTextColor(
-            when (lecture.status) {
-                "upcoming" -> holder.itemView.context.getColor(android.R.color.holo_green_dark)
-                "full" -> holder.itemView.context.getColor(android.R.color.holo_red_dark)
-                "completed" -> holder.itemView.context.getColor(android.R.color.darker_gray)
-                else -> holder.itemView.context.getColor(android.R.color.holo_orange_dark)
-            }
-        )
+        holder.tvLectureTitle.text = lecture.title
+        holder.tvLectureSpeaker.text = lecture.speaker
+        holder.tvLectureDateTime.text = "${lecture.date} ${lecture.time}"
+        holder.tvParticipants.text = "${lecture.registered}人已报名"
 
-        // 显示主题
-        holder.tvTopics.text = "主题：${lecture.topics.joinToString("、")}"
+        // 根据状态设置样式
+        when (lecture.status) {
+            "upcoming" -> {
+                holder.tvLectureStatus.text = "即将开始"
+                holder.tvLectureStatus.setTextColor(holder.itemView.context.getColor(R.color.tcm_primary))
+                holder.tvLectureStatus.setBackgroundResource(R.drawable.bg_tag_category)
+            }
+            "ongoing" -> {
+                holder.tvLectureStatus.text = "进行中"
+                holder.tvLectureStatus.setTextColor(holder.itemView.context.getColor(R.color.tcm_accent))
+                holder.tvLectureStatus.setBackgroundResource(R.drawable.bg_tag_default)
+            }
+            "completed" -> {
+                holder.tvLectureStatus.text = "已结束"
+                holder.tvLectureStatus.setTextColor(holder.itemView.context.getColor(android.R.color.darker_gray))
+                holder.tvLectureStatus.setBackgroundResource(R.drawable.bg_tag_default)
+            }
+            "full" -> {
+                holder.tvLectureStatus.text = "已满员"
+                holder.tvLectureStatus.setTextColor(holder.itemView.context.getColor(android.R.color.holo_red_dark))
+                holder.tvLectureStatus.setBackgroundResource(R.drawable.bg_tag_default)
+            }
+        }
 
         holder.itemView.setOnClickListener {
             onLectureClick(lecture)
@@ -67,24 +81,4 @@ class LectureAdapter(
     }
 
     override fun getItemCount() = lectures.size
-
-    private fun getTypeText(type: String): String {
-        return when (type) {
-            "lecture" -> "[讲座]"
-            "workshop" -> "[工作坊]"
-            "health_talk" -> "[健康讲座]"
-            "activity" -> "[活动]"
-            else -> ""
-        }
-    }
-
-    private fun getStatusText(status: String): String {
-        return when (status) {
-            "upcoming" -> "即将开始"
-            "ongoing" -> "进行中"
-            "completed" -> "已结束"
-            "full" -> "已满员"
-            else -> ""
-        }
-    }
 }

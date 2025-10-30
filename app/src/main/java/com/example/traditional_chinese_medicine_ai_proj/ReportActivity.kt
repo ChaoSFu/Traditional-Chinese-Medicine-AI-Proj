@@ -1,19 +1,29 @@
 package com.example.traditional_chinese_medicine_ai_proj
 
 import android.Manifest
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.traditional_chinese_medicine_ai_proj.adapter.ReportHistoryAdapter
+import com.example.traditional_chinese_medicine_ai_proj.data.Report
+import com.example.traditional_chinese_medicine_ai_proj.utils.MockDataLoader
 
 class ReportActivity : AppCompatActivity() {
 
+    private lateinit var recyclerReportHistory: RecyclerView
+    private lateinit var tvNoReports: TextView
     private lateinit var etSymptoms: EditText
     private lateinit var etDuration: EditText
     private lateinit var etNotes: EditText
@@ -21,6 +31,9 @@ class ReportActivity : AppCompatActivity() {
     private lateinit var btnTakePhoto: Button
     private lateinit var btnSubmit: Button
     private lateinit var btnBack: Button
+
+    private lateinit var reportAdapter: ReportHistoryAdapter
+    private val reports = mutableListOf<Report>()
 
     companion object {
         private const val REQUEST_CODE_CAMERA = 100
@@ -42,10 +55,13 @@ class ReportActivity : AppCompatActivity() {
         setContentView(R.layout.activity_report)
 
         initViews()
+        loadReportHistory()
         setupListeners()
     }
 
     private fun initViews() {
+        recyclerReportHistory = findViewById(R.id.recyclerReportHistory)
+        tvNoReports = findViewById(R.id.tvNoReports)
         etSymptoms = findViewById(R.id.etSymptoms)
         etDuration = findViewById(R.id.etDuration)
         etNotes = findViewById(R.id.etNotes)
@@ -53,6 +69,34 @@ class ReportActivity : AppCompatActivity() {
         btnTakePhoto = findViewById(R.id.btnTakePhoto)
         btnSubmit = findViewById(R.id.btnSubmit)
         btnBack = findViewById(R.id.btnBack)
+
+        // 设置历史记录RecyclerView
+        reportAdapter = ReportHistoryAdapter(reports) { report ->
+            onReportClicked(report)
+        }
+        recyclerReportHistory.layoutManager = LinearLayoutManager(this)
+        recyclerReportHistory.adapter = reportAdapter
+    }
+
+    private fun loadReportHistory() {
+        reports.clear()
+        reports.addAll(MockDataLoader.loadReports(this))
+
+        if (reports.isEmpty()) {
+            tvNoReports.visibility = View.VISIBLE
+            recyclerReportHistory.visibility = View.GONE
+        } else {
+            tvNoReports.visibility = View.GONE
+            recyclerReportHistory.visibility = View.VISIBLE
+        }
+
+        reportAdapter.notifyDataSetChanged()
+    }
+
+    private fun onReportClicked(report: Report) {
+        val intent = Intent(this, ReportDetailActivity::class.java)
+        intent.putExtra("REPORT_ID", report.id)
+        startActivity(intent)
     }
 
     private fun setupListeners() {

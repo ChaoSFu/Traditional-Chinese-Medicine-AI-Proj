@@ -13,7 +13,7 @@
     "capacity": 50,
     "registered": 32,
     "status": "upcoming",
-    "imageUrl": "",
+    "imageUrl": "https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=800&q=80",
     "requiresRegistration": true
   },
   {
@@ -30,7 +30,7 @@
     "capacity": 40,
     "registered": 38,
     "status": "upcoming",
-    "imageUrl": "",
+    "imageUrl": "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=800&q=80",
     "requiresRegistration": true
   },
   {
@@ -47,7 +47,7 @@
     "capacity": 20,
     "registered": 20,
     "status": "full",
-    "imageUrl": "",
+    "imageUrl": "https://images.unsplash.com/photo-1555252333-9f8e92e65df9?w=800&q=80",
     "requiresRegistration": true
   },
   {
@@ -64,7 +64,7 @@
     "capacity": 60,
     "registered": 45,
     "status": "upcoming",
-    "imageUrl": "",
+    "imageUrl": "https://images.unsplash.com/photo-1515377905703-c4788e51af15?w=800&q=80",
     "requiresRegistration": true
   },
   {
@@ -81,7 +81,7 @@
     "capacity": 35,
     "registered": 28,
     "status": "upcoming",
-    "imageUrl": "",
+    "imageUrl": "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=800&q=80",
     "requiresRegistration": true
   },
   {
@@ -98,7 +98,7 @@
     "capacity": 100,
     "registered": 0,
     "status": "upcoming",
-    "imageUrl": "",
+    "imageUrl": "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=800&q=80",
     "requiresRegistration": false
   },
   {
@@ -115,7 +115,7 @@
     "capacity": 25,
     "registered": 25,
     "status": "completed",
-    "imageUrl": "",
+    "imageUrl": "https://images.unsplash.com/photo-1576092768241-dec231879fc3?w=800&q=80",
     "requiresRegistration": true
   }
 ]

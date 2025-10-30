@@ -91,6 +91,13 @@
             android:parentActivityName=".MainActivity"
             android:screenOrientation="portrait" />
 
+        <!-- Report Detail Activity -->
+        <activity
+            android:name=".ReportDetailActivity"
+            android:exported="false"
+            android:parentActivityName=".ReportActivity"
+            android:screenOrientation="portrait" />
+
         <!-- Medical Records Activity -->
         <activity
             android:name=".MedicalRecordsActivity"
@@ -105,12 +112,42 @@
             android:parentActivityName=".MainActivity"
             android:screenOrientation="portrait" />
 
+        <!-- Lecture Detail Activity -->
+        <activity
+            android:name=".LectureDetailActivity"
+            android:exported="false"
+            android:parentActivityName=".CommunityActivity"
+            android:screenOrientation="portrait" />
+
         <!-- Department Detail Activity -->
         <activity
             android:name=".DepartmentDetailActivity"
             android:exported="false"
             android:parentActivityName=".MainActivity"
             android:screenOrientation="portrait" />
+
+        <!-- Community Activity -->
+        <activity
+            android:name=".CommunityActivity"
+            android:exported="false"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait" />
+
+        <!-- Post Detail Activity -->
+        <activity
+            android:name=".PostDetailActivity"
+            android:exported="false"
+            android:parentActivityName=".CommunityActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" />
+
+        <!-- Post Create Activity -->
+        <activity
+            android:name=".PostCreateActivity"
+            android:exported="false"
+            android:parentActivityName=".CommunityActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" />
 
         <!-- Chat Activity - AI Q&A -->
         <activity

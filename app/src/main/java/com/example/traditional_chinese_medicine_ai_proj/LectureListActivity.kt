@@ -1,5 +1,6 @@
 package com.example.traditional_chinese_medicine_ai_proj
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
@@ -55,21 +56,8 @@ class LectureListActivity : AppCompatActivity() {
     }
 
     private fun onLectureClicked(lecture: Lecture) {
-        // TODO: 跳转到讲座详情页或显示报名对话框
-        android.widget.Toast.makeText(
-            this,
-            "讲座：${lecture.title}\n状态：${getStatusText(lecture.status)}",
-            android.widget.Toast.LENGTH_LONG
-        ).show()
-    }
-
-    private fun getStatusText(status: String): String {
-        return when (status) {
-            "upcoming" -> "即将开始，可报名"
-            "ongoing" -> "进行中"
-            "completed" -> "已结束"
-            "full" -> "已满员"
-            else -> "未知"
-        }
+        val intent = Intent(this, LectureDetailActivity::class.java)
+        intent.putExtra("LECTURE_ID", lecture.id)
+        startActivity(intent)
     }
 }

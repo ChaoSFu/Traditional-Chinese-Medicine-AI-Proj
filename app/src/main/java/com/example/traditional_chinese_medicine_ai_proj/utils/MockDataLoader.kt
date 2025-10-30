@@ -13,6 +13,9 @@ object MockDataLoader {
 
     private val gson = Gson()
 
+    // 运行时帖子列表（用于存储新发布的帖子）
+    private val runtimePosts = mutableListOf<Post>()
+
     /**
      * 加载医师列表
      */
@@ -202,5 +205,95 @@ object MockDataLoader {
      */
     fun getProductById(context: Context, productId: Int): PointsProduct? {
         return loadPointsProducts(context).find { it.id == productId }
+    }
+
+    /**
+     * 加载社区帖子列表
+     */
+    fun loadPosts(context: Context): List<Post> {
+        return try {
+            val json = context.assets.open("mock/community/posts.json")
+                .bufferedReader()
+                .use { it.readText() }
+            val type = object : TypeToken<List<Post>>() {}.type
+            val jsonPosts: List<Post> = gson.fromJson(json, type)
+
+            // 合并JSON文件中的帖子和运行时添加的帖子
+            (runtimePosts + jsonPosts).sortedByDescending { it.id }
+        } catch (e: Exception) {
+            e.printStackTrace()
+            runtimePosts.toList()
+        }
+    }
+
+    /**
+     * 添加新帖子
+     */
+    fun addPost(post: Post) {
+        runtimePosts.add(0, post)  // 添加到列表开头
+    }
+
+    /**
+     * 加载评论列表
+     */
+    fun loadComments(context: Context): List<Comment> {
+        return try {
+            val json = context.assets.open("mock/community/comments.json")
+                .bufferedReader()
+                .use { it.readText() }
+            val type = object : TypeToken<List<Comment>>() {}.type
+            gson.fromJson(json, type)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            emptyList()
+        }
+    }
+
+    /**
+     * 根据帖子ID获取评论列表
+     */
+    fun getCommentsByPostId(context: Context, postId: Int): List<Comment> {
+        return loadComments(context).filter { it.postId == postId }
+    }
+
+    /**
+     * 根据分类获取帖子
+     */
+    fun getPostsByCategory(context: Context, category: String): List<Post> {
+        return if (category == "全部") {
+            loadPosts(context)
+        } else {
+            loadPosts(context).filter { it.category == category }
+        }
+    }
+
+    /**
+     * 根据ID获取帖子详情
+     */
+    fun getPostById(context: Context, postId: Int): Post? {
+        return loadPosts(context).find { it.id == postId }
+    }
+
+    /**
+     * 加载病情上报记录
+     */
+    fun loadReports(context: Context): List<Report> {
+        return try {
+            val json = context.assets.open("mock/reports.json")
+                .bufferedReader()
+                .use { it.readText() }
+            val type = object : TypeToken<List<Report>>() {}.type
+            gson.fromJson(json, type)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            emptyList()
+        }
+    }
+
+    /**
+     * 根据ID获取上报记录详情
+     */
+    fun getReportById(context: Context, reportId: Int): Report? {
+        return loadReports(context).find { it.id == reportId }
     }
 }

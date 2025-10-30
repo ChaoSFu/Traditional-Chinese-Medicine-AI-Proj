@@ -87,6 +87,10 @@ dependencies {
     implementation(libs.markwon.strikethrough)
     implementation(libs.markwon.tasklist)
 
+    // Glide for image loading
+    implementation(libs.glide)
+    ksp(libs.glide.compiler)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)

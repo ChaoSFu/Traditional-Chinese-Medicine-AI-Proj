@@ -5,27 +5,19 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
-import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.traditional_chinese_medicine_ai_proj.ChatActivity
-import com.example.traditional_chinese_medicine_ai_proj.HandDetectActivity
-import com.example.traditional_chinese_medicine_ai_proj.LectureListActivity
+import com.example.traditional_chinese_medicine_ai_proj.LectureDetailActivity
 import com.example.traditional_chinese_medicine_ai_proj.MedicalRecordsActivity
 import com.example.traditional_chinese_medicine_ai_proj.ReportActivity
 import com.example.traditional_chinese_medicine_ai_proj.R
-import com.example.traditional_chinese_medicine_ai_proj.data.Lecture
-import com.example.traditional_chinese_medicine_ai_proj.adapter.LectureAdapter
 import com.example.traditional_chinese_medicine_ai_proj.utils.MockDataLoader
 import com.example.traditional_chinese_medicine_ai_proj.utils.PointsManager
 
 /**
  * 首页Fragment
- * 整合个人中心、健康卡片、讲座推荐、快捷入口
+ * 整合个人中心、健康卡片、快捷入口
  */
 class HomeFragment : Fragment() {
 
@@ -37,11 +29,20 @@ class HomeFragment : Fragment() {
     private lateinit var layoutPointsSection: LinearLayout
     private lateinit var layoutRecordsSection: LinearLayout
     private lateinit var layoutReportSection: LinearLayout
-    private lateinit var recyclerLectures: RecyclerView
-    private lateinit var btnViewAllLectures: Button
+    private lateinit var cardCommunity: com.google.android.material.card.MaterialCardView
 
-    private lateinit var lectureAdapter: LectureAdapter
-    private val lectures = mutableListOf<Lecture>()
+    // 社区相关
+    private lateinit var tvTodayPosts: TextView
+    private lateinit var tvActiveUsers: TextView
+    private lateinit var tvUpcomingLectures: TextView
+    private lateinit var layoutUpcomingLecture: LinearLayout
+    private lateinit var tvUpcomingLectureTitle: TextView
+    private lateinit var tvUpcomingLectureTime: TextView
+    private lateinit var tvHotPost1: TextView
+    private lateinit var tvHotPost2: TextView
+    private lateinit var tvHotPost3: TextView
+
+    private var upcomingLectureId: Int = -1
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -68,15 +69,18 @@ class HomeFragment : Fragment() {
         layoutPointsSection = view.findViewById(R.id.layoutPointsSection)
         layoutRecordsSection = view.findViewById(R.id.layoutRecordsSection)
         layoutReportSection = view.findViewById(R.id.layoutReportSection)
-        recyclerLectures = view.findViewById(R.id.recyclerLectures)
-        btnViewAllLectures = view.findViewById(R.id.btnViewAllLectures)
+        cardCommunity = view.findViewById(R.id.cardCommunity)
 
-        // 设置讲座RecyclerView
-        lectureAdapter = LectureAdapter(lectures) { lecture ->
-            onLectureClicked(lecture)
-        }
-        recyclerLectures.layoutManager = LinearLayoutManager(requireContext())
-        recyclerLectures.adapter = lectureAdapter
+        // 社区相关
+        tvTodayPosts = view.findViewById(R.id.tvTodayPosts)
+        tvActiveUsers = view.findViewById(R.id.tvActiveUsers)
+        tvUpcomingLectures = view.findViewById(R.id.tvUpcomingLectures)
+        layoutUpcomingLecture = view.findViewById(R.id.layoutUpcomingLecture)
+        tvUpcomingLectureTitle = view.findViewById(R.id.tvUpcomingLectureTitle)
+        tvUpcomingLectureTime = view.findViewById(R.id.tvUpcomingLectureTime)
+        tvHotPost1 = view.findViewById(R.id.tvHotPost1)
+        tvHotPost2 = view.findViewById(R.id.tvHotPost2)
+        tvHotPost3 = view.findViewById(R.id.tvHotPost3)
     }
 
     private fun loadData() {
@@ -105,17 +109,48 @@ class HomeFragment : Fragment() {
         val ongoingCount = records.count { it.progress == "进行中" }
         tvRecordsSummary.text = "共${totalCount}条记录，${ongoingCount}条进行中"
 
-        // 加载即将开始的讲座（最多3个）
-        val upcomingLectures = MockDataLoader.getUpcomingLectures(requireContext(), 3)
-        lectures.clear()
-        lectures.addAll(upcomingLectures)
-        lectureAdapter.notifyDataSetChanged()
+        // 加载社区数据
+        loadCommunityData()
+    }
+
+    private fun loadCommunityData() {
+        // 加载帖子数据
+        val posts = MockDataLoader.loadPosts(requireContext())
+
+        // 模拟今日新帖数（取总数的20%）
+        val todayPostsCount = (posts.size * 0.2).toInt().coerceAtLeast(1)
+        tvTodayPosts.text = todayPostsCount.toString()
+
+        // 模拟活跃用户数（基于帖子数 * 3）
+        val activeUsersCount = posts.size * 3
+        tvActiveUsers.text = activeUsersCount.toString()
+
+        // 加载即将开始的讲座
+        val lectures = MockDataLoader.loadLectures(requireContext())
+        val upcomingLectures = lectures.filter { it.status == "upcoming" }
+        tvUpcomingLectures.text = upcomingLectures.size.toString()
+
+        if (upcomingLectures.isNotEmpty()) {
+            val lecture = upcomingLectures.first()
+            upcomingLectureId = lecture.id
+            tvUpcomingLectureTitle.text = lecture.title
+            tvUpcomingLectureTime.text = "${lecture.date} ${lecture.time.split("-").first()} • ${lecture.speaker}"
+        }
+
+        // 加载热门帖子（按点赞数排序）
+        val hotPosts = posts.sortedByDescending { it.likes }.take(3)
+        if (hotPosts.size >= 1) {
+            tvHotPost1.text = hotPosts[0].title
+        }
+        if (hotPosts.size >= 2) {
+            tvHotPost2.text = hotPosts[1].title
+        }
+        if (hotPosts.size >= 3) {
+            tvHotPost3.text = hotPosts[2].title
+        }
     }
 
     private fun setupListeners() {
-        btnViewAllLectures.setOnClickListener {
-            startActivity(Intent(requireContext(), LectureListActivity::class.java))
-        }
 
         layoutPointsSection.setOnClickListener {
             // 可以跳转到积分详情页或商城
@@ -133,14 +168,20 @@ class HomeFragment : Fragment() {
             // 跳转到病情上报页面
             startActivity(Intent(requireContext(), ReportActivity::class.java))
         }
-    }
 
-    private fun onLectureClicked(lecture: Lecture) {
-        Toast.makeText(
-            requireContext(),
-            "讲座：${lecture.title}",
-            Toast.LENGTH_SHORT
-        ).show()
+        cardCommunity.setOnClickListener {
+            // 跳转到中医交流社区
+            startActivity(Intent(requireContext(), com.example.traditional_chinese_medicine_ai_proj.CommunityActivity::class.java))
+        }
+
+        // 点击讲座预告跳转详情
+        layoutUpcomingLecture.setOnClickListener {
+            if (upcomingLectureId != -1) {
+                val intent = Intent(requireContext(), LectureDetailActivity::class.java)
+                intent.putExtra("LECTURE_ID", upcomingLectureId)
+                startActivity(intent)
+            }
+        }
     }
 
     override fun onResume() {
