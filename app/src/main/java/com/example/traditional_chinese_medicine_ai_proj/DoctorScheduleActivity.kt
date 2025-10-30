@@ -10,9 +10,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.traditional_chinese_medicine_ai_proj.adapter.DoctorScheduleAdapter
 import com.example.traditional_chinese_medicine_ai_proj.data.Doctor
+import com.example.traditional_chinese_medicine_ai_proj.data.DoctorSchedule
 import com.example.traditional_chinese_medicine_ai_proj.data.TimeSlot
 import com.example.traditional_chinese_medicine_ai_proj.utils.MockDataLoader
 import com.example.traditional_chinese_medicine_ai_proj.utils.AppointmentManager
+import java.text.SimpleDateFormat
+import java.util.*
 
 /**
  * 医师排班表Activity
@@ -73,8 +76,53 @@ class DoctorScheduleActivity : AppCompatActivity() {
         tvDoctorTitle.text = doctor!!.title
         tvDoctorDept.text = doctor!!.dept
 
-        // 加载排班表
-        scheduleAdapter.submitSchedule(doctor!!.schedule)
+        // 加载排班表并过滤已过期的日期和时段
+        val filteredSchedule = filterScheduleByCurrentTime(doctor!!.schedule)
+        scheduleAdapter.submitSchedule(filteredSchedule)
+    }
+
+    /**
+     * 根据当前时间过滤排班表
+     * 1. 移除已经过去的日期
+     * 2. 对当天的时段，标记已过去的时段为不可用
+     */
+    private fun filterScheduleByCurrentTime(schedules: List<DoctorSchedule>): List<DoctorSchedule> {
+        val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+        val timeFormat = SimpleDateFormat("HH:mm", Locale.getDefault())
+        val calendar = Calendar.getInstance()
+
+        val currentDate = dateFormat.format(calendar.time)
+        val currentTime = timeFormat.format(calendar.time)
+
+        // 解析当前日期为 Date 对象，用于日期比较
+        val currentDateObj = dateFormat.parse(currentDate)
+
+        return schedules.mapNotNull { schedule ->
+            // 解析排班日期
+            val scheduleDate = try {
+                dateFormat.parse(schedule.date)
+            } catch (e: Exception) {
+                null
+            }
+
+            when {
+                scheduleDate == null -> null // 日期格式错误，跳过
+                scheduleDate.before(currentDateObj) -> null // 已过去的日期，不显示
+                schedule.date == currentDate -> {
+                    // 当天的排班，需要过滤已过去的时段
+                    val updatedTimeSlots = schedule.timeSlots.map { timeSlot ->
+                        if (timeSlot.time < currentTime) {
+                            // 时段已过去，设置为不可用
+                            timeSlot.copy(available = false)
+                        } else {
+                            timeSlot
+                        }
+                    }
+                    schedule.copy(timeSlots = updatedTimeSlots)
+                }
+                else -> schedule // 未来的日期，保持不变
+            }
+        }
     }
 
     private fun setupListeners() {
